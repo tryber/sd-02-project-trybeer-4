@@ -1,11 +1,11 @@
 const { getTable } = require('./connection');
 
 const getAll = async () => (
-  await getTable('users')
+  getTable('users')
     .then((table) =>
       table
         .select(['id', 'name', 'email', 'password', 'role'])
-        .execute()
+        .execute(),
     )
     .then((results) => results.fetchAll())
     .then((users) =>
@@ -15,27 +15,27 @@ const getAll = async () => (
         email,
         password,
         role,
-      })
+      }),
     ))
 );
 
 const findById = async (id) => (
-  await getAll()
+  getAll()
     .find((user) => user.id === id)
 );
 
 const findByEmail = async (email) => (
-  await getAll()
+  getAll()
     .find((user) => user.email === email)
 );
 
 const create = async ({ name, email, password, role = 'client' }) => (
-  await getTable('users')
+  getTable('users')
     .then((table) =>
       table
         .insert(['name', 'email', 'password', 'role'])
         .values([name, email, password, role])
-        .execute()
+        .execute(),
     )
     .then(() => ({
       name,
@@ -46,7 +46,7 @@ const create = async ({ name, email, password, role = 'client' }) => (
 );
 
 const update = async ({ id, name }) => (
-  await getTable('users')
+  getTable('users')
     .then((table) =>
       table
         .update()
@@ -55,11 +55,11 @@ const update = async ({ id, name }) => (
         .set('name', name)
         .execute(),
     )
-    .then(async () => await findById(id))
+    .then(async () => findById(id))
 );
 
 const remove = async (id) => (
-  await getTable('users')
+  getTable('users')
     .then((table) =>
       table
         .delete()

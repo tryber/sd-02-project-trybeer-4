@@ -63,7 +63,7 @@ const remove = async (id) => (
     )
 );
 
-const setImageUrl = ({ id, imageUrl }) => (
+const setImageUrl = async ({ id, imageUrl }) => (
   await getTable('products')
     .then((table) =>
       table
