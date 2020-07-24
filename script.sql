@@ -46,3 +46,12 @@ CREATE TRIGGER trigger_order_insert
   BEFORE INSERT ON orders
   FOR EACH ROW
     SET NEW.date = NOW();
+
+CREATE TABLE order_product (
+  order_id INT,
+  product_id INT,
+  product_quantity INT,
+  PRIMARY KEY (order_id, product_id),
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
