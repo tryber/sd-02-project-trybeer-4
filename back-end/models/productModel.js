@@ -20,7 +20,9 @@ const getAll = async () => (
 
 const findById = async (id) => (
   getAll()
-    .find((recipe) => recipe.id === id)
+    .then((products) => products
+      .find((product) => product.id === id),
+    )
 );
 
 const create = async ({ name, unitPrice }) => (
