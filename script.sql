@@ -16,8 +16,8 @@ INSERT INTO users (name, email, password, role)
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100),
-  unit_price DECIMAL(5, 2),
+  name VARCHAR(100) NOT NULL,
+  unit_price DECIMAL(5, 2) NOT NULL,
   image_url VARCHAR(2083)
 );
 
@@ -37,9 +37,10 @@ INSERT INTO products (name, unit_price, image_url)
 
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  address VARCHAR(300),
-  total_price DECIMAL(6, 2),
-  date DATETIME
+  address VARCHAR(300) NOT NULL,
+  total_price DECIMAL(6, 2) NOT NULL,
+  date DATETIME,
+  status VARCHAR(15) DEFAULT 'pendente'
 );
 
 CREATE TRIGGER trigger_order_insert
@@ -48,9 +49,9 @@ CREATE TRIGGER trigger_order_insert
     SET NEW.date = NOW();
 
 CREATE TABLE order_product (
-  order_id INT,
-  product_id INT,
-  product_quantity INT,
+  order_id INT NOT NULL,
+  product_id INT NOT NULL,
+  product_quantity INT NOT NULL,
   PRIMARY KEY (order_id, product_id),
   FOREIGN KEY (order_id) REFERENCES orders(id),
   FOREIGN KEY (product_id) REFERENCES products(id)
