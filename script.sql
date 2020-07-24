@@ -40,7 +40,9 @@ CREATE TABLE orders (
   address VARCHAR(300) NOT NULL,
   total_price DECIMAL(6, 2) NOT NULL,
   date DATETIME,
-  status VARCHAR(15) DEFAULT 'pendente'
+  status VARCHAR(15) DEFAULT 'pendente',
+  client_id INT,
+  FOREIGN KEY (client_id) REFERENCES users(id)
 );
 
 CREATE TRIGGER trigger_order_insert
