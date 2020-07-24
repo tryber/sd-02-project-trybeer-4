@@ -1,4 +1,5 @@
 const { getTable } = require('./connection');
+const { updateTable } = require('./utils');
 
 const getAll = async () => (
   getTable('users')
@@ -21,12 +22,16 @@ const getAll = async () => (
 
 const findById = async (id) => (
   getAll()
-    .find((user) => user.id === id)
+    .then((users) => users
+      .find((user) => user.id === id)
+    )
 );
 
 const findByEmail = async (email) => (
   getAll()
-    .find((user) => user.email === email)
+    .then((users) => users
+      .find((user) => user.email === email)
+    )
 );
 
 const create = async ({ name, email, password, role = 'client' }) => (
@@ -46,15 +51,7 @@ const create = async ({ name, email, password, role = 'client' }) => (
 );
 
 const update = async ({ id, name }) => (
-  getTable('users')
-    .then((table) =>
-      table
-        .update()
-        .where('id = :id')
-        .bind('id', id)
-        .set('name', name)
-        .execute(),
-    )
+  updateTable('users', id, 'name', name)
     .then(async () => findById(id))
 );
 

@@ -1,4 +1,5 @@
 const { getSession, getTable } = require('./connection');
+const { updateTable } = require('./utils');
 
 const getOrdersWithoutProducts = async () => (
   getTable('orders')
@@ -56,12 +57,16 @@ const getAll = async () => {
 
 const getByClientId = async (clientId) => (
   getAll()
-    .filter((order) => order.clientId === clientId)
+    .then((orders) => orders
+      .filter((order) => order.clientId === clientId)
+    )
 );
 
 const findById = async (id) => (
   getAll()
-    .find((order) => order.id === id)
+    .then((orders) => orders
+      .find((order) => order.id === id)
+    )
 );
 
 const insertInOrders = async ({ address, totalPrice, clientId }) => (
@@ -100,14 +105,7 @@ const create = async ({ address, totalPrice, clientId, products }) => {
 };
 
 const update = async ({ id, status }) => (
-  getTable('orders')
-    .then((table) => table
-      .update()
-      .where('id = :id')
-      .bind('id', id)
-      .set('status', status)
-      .execute(),
-    )
+  updateTable('orders', id, 'status', status)
     .then(async () => findById(id))
 );
 
