@@ -37,7 +37,12 @@ INSERT INTO products (name, unit_price, image_url)
 
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date DATETIME,
   address VARCHAR(300),
-  total_price DECIMAL(6, 2)
+  total_price DECIMAL(6, 2),
+  date DATETIME
 );
+
+CREATE TRIGGER trigger_order_insert
+  BEFORE INSERT ON orders
+  FOR EACH ROW
+    SET NEW.date = NOW();
