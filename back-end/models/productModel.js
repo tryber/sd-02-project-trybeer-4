@@ -21,7 +21,7 @@ const getAll = async () => (
     ))
 );
 
-const getById = async (id) => (
+const findById = async (id) => (
   await getAll()
     .find((recipe) => recipe.id === id)
 );
@@ -82,7 +82,7 @@ const addImageUrl = ({ id, imageUrl }) => (
 
 module.exports = {
   getAll,
-  getById,
+  findById,
   create,
   update,
   remove,
