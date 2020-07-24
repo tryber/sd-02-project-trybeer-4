@@ -1,11 +1,11 @@
 const { getTable } = require('./connection');
 
 const getAll = async () => (
-  await getTable('products')
+  getTable('products')
     .then((table) =>
       table
         .select(['id', 'name', 'unit_price', 'image_url'])
-        .execute()
+        .execute(),
     )
     .then((results) => results.fetchAll())
     .then((products) => (
@@ -19,12 +19,12 @@ const getAll = async () => (
 );
 
 const findById = async (id) => (
-  await getAll()
+  getAll()
     .find((recipe) => recipe.id === id)
 );
 
 const create = async ({ name, unitPrice }) => (
-  await getTable('products')
+  getTable('products')
     .then((table) =>
       table
         .insert(['name', 'unit_price'])
@@ -39,7 +39,7 @@ const create = async ({ name, unitPrice }) => (
 );
 
 const update = async ({ id, name, unitPrice }) => (
-  await getTable('products')
+  getTable('products')
     .then((table) =>
       table
         .update()
@@ -49,11 +49,11 @@ const update = async ({ id, name, unitPrice }) => (
         .set('unit_price', unitPrice)
         .execute(),
     )
-    .then(async () => await findById(id))
+    .then(async () => findById(id))
 );
 
 const remove = async (id) => (
-  await getTable('products')
+  getTable('products')
     .then((table) =>
       table
         .delete()
@@ -64,7 +64,7 @@ const remove = async (id) => (
 );
 
 const setImageUrl = async ({ id, imageUrl }) => (
-  await getTable('products')
+  getTable('products')
     .then((table) =>
       table
         .update()
