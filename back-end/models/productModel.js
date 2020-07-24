@@ -49,7 +49,7 @@ const update = async ({ id, name, unitPrice }) => (
         .set('unit_price', unitPrice)
         .execute(),
     )
-    .then(() => await findById(id))
+    .then(async () => await findById(id))
 );
 
 const remove = async (id) => (

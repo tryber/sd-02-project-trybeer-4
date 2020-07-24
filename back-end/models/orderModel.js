@@ -1,11 +1,11 @@
 const { getSession, getTable } = require('./connection');
 
 const getOrdersWithoutProducts = async () => (
-  await getTable('orders')
+  getTable('orders')
     .then((table) =>
       table
         .select(['id', 'address', 'total_price', 'date', 'status', 'client_id'])
-        .execute()
+        .execute(),
     )
     .then((results) => results.fetchAll())
     .then((orders) => (
@@ -33,13 +33,13 @@ const getProductsForEachOrder = async (ids) => (
             WHERE order_id = ?;
           `)
           .bind(id)
-          .execute()
+          .execute(),
       )
       .then((results) => results.fetchAll())
       .then((products) => products.map(([productId, productQuantity]) => ({
         productId,
         productQuantity,
-      })))
+      }))),
   ))
 );
 
@@ -50,22 +50,22 @@ const getAll = async () => {
 
   return ordersWithoutProducts.map((order, i) => ({
     ...order,
-    products: productsForEachOrder[i]
-  }))
+    products: productsForEachOrder[i],
+  }));
 };
 
 const getByClientId = async (clientId) => (
-  await getAll()
+  getAll()
     .filter((order) => order.clientId === clientId)
 );
 
 const findById = async (id) => (
-  await getAll()
+  getAll()
     .find((order) => order.id === id)
 );
 
 const insertInOrders = async ({ address, totalPrice, clientId }) => (
-  await getTable('orders')
+  getTable('orders')
     .then((table) =>
       table
         .insert(['address', 'total_price', 'client_id'])
@@ -73,19 +73,19 @@ const insertInOrders = async ({ address, totalPrice, clientId }) => (
         .execute(),
     )
     .then(async ({ getAutoIncrementValue }) =>
-      await findById(getAutoIncrementValue())
+      findById(getAutoIncrementValue()),
     )
 );
 
 const insertInOrderProduct = async ({ orderId, products }) => (
   products.map(async ({ productId, productQuantity }) =>
-    await getTable('orders')
+    getTable('orders')
       .then((table) =>
         table
           .insert(['order_id', 'product_id', 'product_quantity'])
           .values(orderId, productId, productQuantity)
           .execute(),
-      )
+      ),
   )
 );
 
@@ -100,7 +100,7 @@ const create = async ({ address, totalPrice, clientId, products }) => {
 };
 
 const update = async ({ id, status }) => (
-  await getTable('orders')
+  getTable('orders')
     .then((table) =>
       table
         .update()
@@ -109,11 +109,11 @@ const update = async ({ id, status }) => (
         .set('status', status)
         .execute(),
     )
-    .then(async () => await findById(id))
+    .then(async () => findById(id))
 );
 
 const remove = async (id) => (
-  await getTable('orders')
+  getTable('orders')
     .then((table) =>
       table
         .delete()

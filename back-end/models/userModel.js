@@ -55,7 +55,7 @@ const update = async ({ id, name }) => (
         .set('name', name)
         .execute(),
     )
-    .then(() => await findById(id))
+    .then(async () => await findById(id))
 );
 
 const remove = async (id) => (
