@@ -1,6 +1,3 @@
-// Acredito que a maioria dessas funções não serão usadas,
-// pois não está explícito um CRUD de produtos nos requisitos da aplicação.
-
 const { getTable } = require('./connection');
 
 const getAll = async () => (
@@ -26,23 +23,22 @@ const findById = async (id) => (
     .find((recipe) => recipe.id === id)
 );
 
-const create = async ({ name, unitPrice, imageUrl }) => (
+const create = async ({ name, unitPrice }) => (
   await getTable('products')
     .then((table) =>
       table
-        .insert(['name', 'unit_price', 'image_url'])
-        .values(name, unitPrice, imageUrl)
+        .insert(['name', 'unit_price'])
+        .values(name, unitPrice)
         .execute(),
     )
     .then(({ getAutoIncrementValue }) => ({
       id: getAutoIncrementValue(),
       name,
       unitPrice,
-      imageUrl,
     }))
 );
 
-const update = async ({ id, name, unitPrice, imageUrl }) => (
+const update = async ({ id, name, unitPrice }) => (
   await getTable('products')
     .then((table) =>
       table
@@ -51,10 +47,9 @@ const update = async ({ id, name, unitPrice, imageUrl }) => (
         .bind('id', id)
         .set('name', name)
         .set('unit_price', unitPrice)
-        .set('image_url', imageUrl)
         .execute(),
     )
-    .then(() => getById(id))
+    .then(() => await findById(id))
 );
 
 const remove = async (id) => (
@@ -68,7 +63,7 @@ const remove = async (id) => (
     )
 );
 
-const addImageUrl = ({ id, imageUrl }) => (
+const setImageUrl = ({ id, imageUrl }) => (
   await getTable('products')
     .then((table) =>
       table
@@ -86,5 +81,5 @@ module.exports = {
   create,
   update,
   remove,
-  addImageUrl,
+  setImageUrl,
 };

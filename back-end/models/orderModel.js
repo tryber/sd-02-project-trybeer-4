@@ -4,17 +4,18 @@ const getOrdersWithoutProducts = async () => (
   await getTable('orders')
     .then((table) =>
       table
-        .select(['id', 'address', 'total_price', 'date', 'status'])
+        .select(['id', 'address', 'total_price', 'date', 'status', 'client_id'])
         .execute()
     )
     .then((results) => results.fetchAll())
     .then((orders) => (
-      orders.map(([id, address, totalPrice, date, status]) => ({
+      orders.map(([id, address, totalPrice, date, status, clientId]) => ({
         id,
         address,
         totalPrice,
         date,
         status,
+        clientId,
       }))
     ))
 );
@@ -53,32 +54,80 @@ const getAll = async () => {
   }))
 };
 
+const getByClientId = async (clientId) => (
+  await getAll()
+    .filter((order) => order.clientId === clientId)
+);
+
 const findById = async (id) => (
   await getAll()
     .find((order) => order.id === id)
 );
 
-const create = async (saleData) => (
-  connection()
-    .then((db) => db.collection('sales').insertOne({ products: saleData }))
-    .then((result) => ({ id: result.insertedId, products: saleData }))
+const insertInOrders = async ({ address, totalPrice, clientId }) => (
+  await getTable('orders')
+    .then((table) =>
+      table
+        .insert(['address', 'total_price', 'client_id'])
+        .values(address, totalPrice, clientId)
+        .execute(),
+    )
+    .then(({ getAutoIncrementValue }) =>
+      await findById(getAutoIncrementValue())
+    )
+);
+
+const insertInOrderProduct = async ({ orderId, products }) => (
+  products.map(({ productId, productQuantity }) =>
+    await getTable('orders')
+      .then((table) =>
+        table
+          .insert(['order_id', 'product_id', 'product_quantity'])
+          .values(orderId, productId, productQuantity)
+          .execute(),
+      )
+  )
+);
+
+const create = async ({ address, totalPrice, clientId, products }) => {
+  const order = await insertInOrders({ address, totalPrice, clientId });
+  await insertInOrderProduct({ orderId: order.id, products });
+
+  return {
+    ...order,
+    products,
+  };
+};
+
+const update = async ({ id, status }) => (
+  await getTable('orders')
+    .then((table) =>
+      table
+        .update()
+        .where('id = :id')
+        .bind('id', id)
+        .set('status', status)
+        .execute(),
+    )
+    .then(() => await findById(id))
 );
 
 const remove = async (id) => (
-  connection()
-    .then((db) => db.collection('sales').removeOne({ _id: ObjectId(id) }))
-);
-
-const update = async (id, saleData) => (
-  connection()
-    .then((db) => db.collection('sales').updateOne(
-      { _id: ObjectId(id) },
-      { $set: { products: saleData } },
-    ))
-    .then(() => ({ id, products: saleData }))
+  await getTable('orders')
+    .then((table) =>
+      table
+        .delete()
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
 );
 
 module.exports = {
   getAll,
+  getByClientId,
   findById,
+  create,
+  update,
+  remove,
 };

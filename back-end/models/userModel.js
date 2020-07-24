@@ -1,24 +1,32 @@
 const { getTable } = require('./connection');
 
-const findByEmail = async (emailParam) => (
+const getAll = async () => (
   await getTable('users')
     .then((table) =>
       table
         .select(['id', 'name', 'email', 'password', 'role'])
-        .where('email = :email')
-        .bind('email', emailParam)
         .execute()
     )
     .then((results) => results.fetchAll())
-    .then((users) => (
+    .then((users) =>
       users.map(([id, name, email, password, role]) => ({
         id,
         name,
         email,
         password,
         role,
-      }))[0]
+      })
     ))
+);
+
+const findById = async (id) => (
+  await getAll()
+    .find((user) => user.id === id)
+);
+
+const findByEmail = async (email) => (
+  await getAll()
+    .find((user) => user.email === email)
 );
 
 const create = async ({ name, email, password, role = 'client' }) => (
@@ -37,7 +45,35 @@ const create = async ({ name, email, password, role = 'client' }) => (
     }))
 );
 
+const update = async ({ id, name }) => (
+  await getTable('users')
+    .then((table) =>
+      table
+        .update()
+        .where('id = :id')
+        .bind('id', id)
+        .set('name', name)
+        .execute(),
+    )
+    .then(() => await findById(id))
+);
+
+const remove = async (id) => (
+  await getTable('users')
+    .then((table) =>
+      table
+        .delete()
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+);
+
 module.exports = {
+  getAll,
+  findById,
   findByEmail,
   create,
+  update,
+  remove,
 };
