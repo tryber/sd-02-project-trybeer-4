@@ -21,8 +21,8 @@ const getOrdersWithoutProducts = async () => (
 );
 
 const getProductsForEachOrder = async (ids) => (
-  ids.map((id) =>
-    await getSession()
+  Promise.all(ids.map((id) =>
+    getSession()
       .then((session) =>
         session
           .sql(`
@@ -40,7 +40,7 @@ const getProductsForEachOrder = async (ids) => (
         productId,
         productQuantity,
       })))
-  )
+  ))
 );
 
 const getAll = async () => {
@@ -72,13 +72,13 @@ const insertInOrders = async ({ address, totalPrice, clientId }) => (
         .values(address, totalPrice, clientId)
         .execute(),
     )
-    .then(({ getAutoIncrementValue }) =>
+    .then(async ({ getAutoIncrementValue }) =>
       await findById(getAutoIncrementValue())
     )
 );
 
 const insertInOrderProduct = async ({ orderId, products }) => (
-  products.map(({ productId, productQuantity }) =>
+  products.map(async ({ productId, productQuantity }) =>
     await getTable('orders')
       .then((table) =>
         table
@@ -109,7 +109,7 @@ const update = async ({ id, status }) => (
         .set('status', status)
         .execute(),
     )
-    .then(() => await findById(id))
+    .then(async () => await findById(id))
 );
 
 const remove = async (id) => (
