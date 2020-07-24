@@ -23,14 +23,14 @@ const getAll = async () => (
 const findById = async (id) => (
   getAll()
     .then((users) => users
-      .find((user) => user.id === id)
+      .find((user) => user.id === id),
     )
 );
 
 const findByEmail = async (email) => (
   getAll()
     .then((users) => users
-      .find((user) => user.email === email)
+      .find((user) => user.email === email),
     )
 );
 
