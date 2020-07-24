@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { AppContext } from '../context';
 
 function loginValidation({ email, password }) {
@@ -13,7 +13,7 @@ function loginValidation({ email, password }) {
 }
 
 async function handleSubmit({ email, password }) {
-  const loginRequisition = await axios.post()
+  // const loginRequisition = await axios.post().then((response) => response).catch();
 }
 
 const LoginButton = () => {
