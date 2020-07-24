@@ -2,12 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 
 const LoginInputs = () => {
-  const {
-    email,
-    password,
-    setEmail,
-    setPassword,
-  } = useContext(AppContext);
+  const { email, password, setEmail, setPassword } = useContext(AppContext);
 
   return (
     <section className="login-section">
