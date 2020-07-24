@@ -101,13 +101,12 @@ const create = async ({ address, totalPrice, clientId, products }) => {
 
 const update = async ({ id, status }) => (
   getTable('orders')
-    .then((table) =>
-      table
-        .update()
-        .where('id = :id')
-        .bind('id', id)
-        .set('status', status)
-        .execute(),
+    .then((table) => table
+      .update()
+      .where('id = :id')
+      .bind('id', id)
+      .set('status', status)
+      .execute(),
     )
     .then(async () => findById(id))
 );
