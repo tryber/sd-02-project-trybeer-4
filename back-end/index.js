@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post(
-  '/login',
+  '/users/login',
   middlewares.fieldsValidator(['email', 'password']),
   controllers.user.login,
 );
@@ -20,6 +20,18 @@ app.post(
   '/users',
   middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
   controllers.user.register,
+);
+
+app.get(
+  '/users/info',
+  middlewares.authentication,
+  controllers.user.getInfo,
+);
+
+app.put(
+  '/users/:id',
+  middlewares.authentication,
+  controllers.user.edit,
 );
 
 app.use(middlewares.boomErrorHandler);

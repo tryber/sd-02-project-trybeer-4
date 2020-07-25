@@ -35,7 +35,23 @@ const register = async ({ name, email, password, role }) => {
   return newUser;
 };
 
+const edit = async ({ idFromUrl, idFromAuth, name }) => {
+  const userExists = await models.user.findById(idFromUrl);
+
+  if (!userExists) {
+    throw boom.notFound('Usuário não encontrado');
+  }
+
+  if (idFromUrl !== idFromAuth) {
+    throw boom.forbidden('Operação não autorizada');
+  }
+
+  const editedUser = await models.user.update({ id: idFromUrl, name });
+  return editedUser;
+};
+
 module.exports = {
   login,
   register,
+  edit,
 };

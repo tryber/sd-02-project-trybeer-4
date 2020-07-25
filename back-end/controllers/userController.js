@@ -73,7 +73,40 @@ const register = rescue(async (req, res, next) => {
   return res.status(201).json({ newUser });
 });
 
+const getInfo = async (req, res, next) => {
+  const { name, email } = req.user;
+  return res.status(200).json({ name, email });
+};
+
+const edit = rescue(async (req, res, next) => {
+  const { id: idFromUrl } = req.params;
+  const { id: idFromAuth } = req.user;
+  const { name } = req.body;
+
+  const nameIsValid = validateName(name);
+  if (!nameIsValid) {
+    return next(boom.badData())
+  }
+
+  const goodName = name
+    .trim()
+    .split(' ')
+    .filter((substr) => substr !== '')
+    .join(' ')
+    .toUpperCase();
+
+  const editedUser = await services.user.edit({
+    idFromUrl: Number(idFromUrl),
+    idFromAuth,
+    name: goodName,
+  });
+
+  return res.status(200).json({ editedUser });
+});
+
 module.exports = {
   login,
   register,
+  getInfo,
+  edit,
 };
