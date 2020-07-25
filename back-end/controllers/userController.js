@@ -70,7 +70,7 @@ const register = rescue(async (req, res, next) => {
     name: goodName,
     email,
     password,
-    role
+    role,
   });
 
   return res.status(201).json({ newUser });

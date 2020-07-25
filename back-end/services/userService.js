@@ -8,7 +8,7 @@ const login = async ({ email, password }) => {
   const user = await models.user.findByEmail(email);
 
   if (!user || user.password !== password) {
-    throw boom.unauthorized('Verifique seu email e senha')
+    throw boom.unauthorized('Verifique seu email e senha');
   }
 
   const { password: _, id, ...userData } = user;
@@ -28,7 +28,7 @@ const register = async ({ name, email, password, role }) => {
   const isNotUnique = await models.user.findByEmail(email);
 
   if (isNotUnique) {
-    throw boom.conflict('Email já está cadastrado')
+    throw boom.conflict('Email já está cadastrado');
   }
 
   const newUser = await models.user.create({ name, email, password, role });
