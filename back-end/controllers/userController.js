@@ -73,7 +73,7 @@ const register = rescue(async (req, res, next) => {
   return res.status(201).json({ newUser });
 });
 
-const getInfo = async (req, res, _next) => {
+const getInfo = async (req, res) => {
   const { name, email } = req.user;
   return res.status(200).json({ name, email });
 };
