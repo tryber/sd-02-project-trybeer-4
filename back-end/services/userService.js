@@ -4,7 +4,7 @@ const models = require('../models');
 
 const { JWT_SECRET } = process.env;
 
-const login = async (email, password) => {
+const login = async ({ email, password }) => {
   const user = await models.user.findByEmail(email);
 
   if (!user || user.password !== password) {
@@ -24,6 +24,18 @@ const login = async (email, password) => {
   return token;
 };
 
+const register = async ({ name, email, password, role }) => {
+  const isNotUnique = await models.user.findByEmail(email);
+
+  if (isNotUnique) {
+    throw boom.conflict('Email já está cadastrado')
+  }
+
+  const newUser = await models.user.create({ name, email, password, role });
+  return newUser;
+};
+
 module.exports = {
   login,
+  register,
 };

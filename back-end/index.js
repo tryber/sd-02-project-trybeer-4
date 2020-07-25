@@ -16,6 +16,11 @@ app.post(
   controllers.user.login,
 );
 
+app.post(
+  '/users',
+  middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
+  controllers.user.register,
+);
 
 app.use(middlewares.boomErrorHandler);
 app.use(middlewares.otherErrorsHandler);
