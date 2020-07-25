@@ -22,7 +22,7 @@ const authentication = async (req, _res, next) => {
     req.user = user;
     return next();
   } catch (err) {
-    next(boom.unauthorized(err.message));
+    return next(boom.unauthorized(err.message));
   }
 };
 

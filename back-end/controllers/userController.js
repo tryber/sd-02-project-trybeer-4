@@ -73,7 +73,7 @@ const register = rescue(async (req, res, next) => {
   return res.status(201).json({ newUser });
 });
 
-const getInfo = async (req, res, next) => {
+const getInfo = async (req, res, _next) => {
   const { name, email } = req.user;
   return res.status(200).json({ name, email });
 };
@@ -85,7 +85,7 @@ const edit = rescue(async (req, res, next) => {
 
   const nameIsValid = validateName(name);
   if (!nameIsValid) {
-    return next(boom.badData())
+    return next(boom.badData());
   }
 
   const goodName = name
