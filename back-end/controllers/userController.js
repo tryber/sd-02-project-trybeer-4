@@ -24,9 +24,9 @@ const login = rescue(async (req, res, next) => {
     return next(boom.badData('Dados inválidos', invalidData.join(', ')));
   }
 
-  const token = await services.user.login({ email, password });
+  const { user, token } = await services.user.login({ email, password });
 
-  return res.status(200).json({ token });
+  return res.status(200).json({ user, token });
 });
 
 const getInvalidDataFromRegister = (name, email, password, role) => {
@@ -73,10 +73,17 @@ const register = rescue(async (req, res, next) => {
   return res.status(201).json({ newUser });
 });
 
-const getInfo = async (req, res) => {
-  const { name, email } = req.user;
-  return res.status(200).json({ name, email });
-};
+const getInfo = rescue(async (req, res) => {
+  const { id: idFromUrl } = req.params;
+  const { id: idFromAuth } = req.user;
+
+  const user = await services.user.getInfo({
+    idFromUrl: Number(idFromUrl),
+    idFromAuth,
+  });
+
+  return res.status(200).json({ user });
+});
 
 const edit = rescue(async (req, res, next) => {
   const { id: idFromUrl } = req.params;

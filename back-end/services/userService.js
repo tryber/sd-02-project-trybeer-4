@@ -21,7 +21,7 @@ const login = async ({ email, password }) => {
 
   const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
 
-  return token;
+  return { user, token };
 };
 
 const register = async ({ name, email, password, role }) => {
@@ -33,6 +33,20 @@ const register = async ({ name, email, password, role }) => {
 
   const newUser = await models.user.create({ name, email, password, role });
   return newUser;
+};
+
+const getInfo = async ({ idFromUrl, idFromAuth }) => {
+  const user = await models.user.findById(idFromUrl);
+
+  if (!user) {
+    throw boom.notFound('Usuário não encontrado');
+  }
+
+  if (idFromUrl !== idFromAuth) {
+    throw boom.forbidden('Operação não autorizada');
+  }
+
+  return user;
 };
 
 const edit = async ({ idFromUrl, idFromAuth, name }) => {
@@ -53,5 +67,6 @@ const edit = async ({ idFromUrl, idFromAuth, name }) => {
 module.exports = {
   login,
   register,
+  getInfo,
   edit,
 };

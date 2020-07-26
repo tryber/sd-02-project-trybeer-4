@@ -25,7 +25,7 @@ userRouter
     controllers.user.login,
   )
   .get(
-    '/info',
+    '/:id',
     middlewares.authentication,
     controllers.user.getInfo,
   )
