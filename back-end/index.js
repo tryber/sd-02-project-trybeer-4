@@ -36,6 +36,17 @@ userRouter
 
 app.use('/users', userRouter);
 
+const productRouter = express.Router();
+
+productRouter
+  .get(
+    '/',
+    middlewares.authentication,
+    controllers.product.getAll,
+  );
+
+app.use('/products', productRouter);
+
 app.use(middlewares.boomErrorHandler);
 app.use(middlewares.otherErrorsHandler);
 

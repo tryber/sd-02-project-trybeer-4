@@ -23,17 +23,17 @@ CREATE TABLE products (
 
 INSERT INTO products (name, unit_price, image_url)
   VALUES
-    ('Skol Lata 250ml', 2.20, 'http://localhost:3000/back-end/public/1'),
-    ('Heineken 600ml', 7.50, 'http://localhost:3000/back-end/public/2'),
-    ('Antarctica Pilsen 300ml', 2.49, 'http://localhost:3000/back-end/public/3'),
-    ('Brahma 600ml', 7.50, 'http://localhost:3000/back-end/public/4'),
-    ('Skol 269ml', 2.19, 'http://localhost:3000/back-end/public/5'),
-    ('Skol Beats Senses 313ml', 4.49, 'http://localhost:3000/back-end/public/6'),
-    ('Becks 330ml', 4.99, 'http://localhost:3000/back-end/public/7'),
-    ('Brahma Duplo Malte 350ml', 2.79, 'http://localhost:3000/back-end/public/8'),
-    ('Becks 600ml', 8.89, 'http://localhost:3000/back-end/public/9'),
-    ('Skol Beats Senses 269ml', 3.57, 'http://localhost:3000/back-end/public/10'),
-    ('Stella Artois 275ml', 3.49, 'http://localhost:3000/back-end/public/11');
+    ('Skol Lata 250ml', 2.20, 'http://localhost:3001/back-end/public/1'),
+    ('Heineken 600ml', 7.50, 'http://localhost:3001/back-end/public/2'),
+    ('Antarctica Pilsen 300ml', 2.49, 'http://localhost:3001/back-end/public/3'),
+    ('Brahma 600ml', 7.50, 'http://localhost:3001/back-end/public/4'),
+    ('Skol 269ml', 2.19, 'http://localhost:3001/back-end/public/5'),
+    ('Skol Beats Senses 313ml', 4.49, 'http://localhost:3001/back-end/public/6'),
+    ('Becks 330ml', 4.99, 'http://localhost:3001/back-end/public/7'),
+    ('Brahma Duplo Malte 350ml', 2.79, 'http://localhost:3001/back-end/public/8'),
+    ('Becks 600ml', 8.89, 'http://localhost:3001/back-end/public/9'),
+    ('Skol Beats Senses 269ml', 3.57, 'http://localhost:3001/back-end/public/10'),
+    ('Stella Artois 275ml', 3.49, 'http://localhost:3001/back-end/public/11');
 
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
