@@ -10,29 +10,31 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post(
-  '/users/login',
-  middlewares.fieldsValidator(['email', 'password']),
-  controllers.user.login,
-);
+const userRouter = express.Router();
 
-app.post(
-  '/users',
-  middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
-  controllers.user.register,
-);
+userRouter
+  .post(
+    '/',
+    middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
+    controllers.user.register,
+  )
+  .post(
+    '/login',
+    middlewares.fieldsValidator(['email', 'password']),
+    controllers.user.login,
+  )
+  .get(
+    '/info',
+    middlewares.authentication,
+    controllers.user.getInfo,
+  )
+  .put(
+    '/:id',
+    middlewares.authentication,
+    controllers.user.edit,
+  );
 
-app.get(
-  '/users/info',
-  middlewares.authentication,
-  controllers.user.getInfo,
-);
-
-app.put(
-  '/users/:id',
-  middlewares.authentication,
-  controllers.user.edit,
-);
+app.use('/users', userRouter);
 
 app.use(middlewares.boomErrorHandler);
 app.use(middlewares.otherErrorsHandler);
