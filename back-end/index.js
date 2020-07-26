@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
@@ -46,6 +47,8 @@ productRouter
   );
 
 app.use('/products', productRouter);
+
+app.use('/back-end/public/', express.static(path.join(__dirname, 'public')));
 
 app.use(middlewares.boomErrorHandler);
 app.use(middlewares.otherErrorsHandler);
