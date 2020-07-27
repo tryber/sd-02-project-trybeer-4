@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
-import { ProductContext } from '../contexts/ProductCardContext';
+import { ProductsContext } from '../contexts/ProductsContext';
 import '../styles/QuantityHandler.css';
 
 const QuantityHandler = ({ index }) => {
-  const { quantity, addOne, subtractOne } = useContext(ProductContext);
+  const { quantities, addOne, subtractOne } = useContext(ProductsContext);
+  const quantity = quantities[index];
 
   return (
     <div className="quantity-handler">
       <button
         data-testid={`${index}-product-minus`}
-        onClick={subtractOne}
+        onClick={() => subtractOne(index)}
         disabled={quantity === 0}
       >
         -
@@ -19,7 +20,7 @@ const QuantityHandler = ({ index }) => {
       </p>
       <button
         data-testid={`${index}-product-plus`}
-        onClick={addOne}
+        onClick={() => addOne(index)}
       >
         +
       </button>
