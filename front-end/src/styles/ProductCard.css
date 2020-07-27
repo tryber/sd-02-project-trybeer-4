@@ -5,5 +5,30 @@
   box-sizing: border-box;
   width: 48%;
   margin: 3px;
-  height: 200px;
+  height: 250px;
+  padding: 3px;
+}
+
+.unit-price {
+  all: unset;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.product-name {
+  font-size: 18px;
+  margin: 10px;
+  text-align: center;
+  height: 10%;
+}
+
+.product-image {
+  height: 110px;
+  display: flex;
+  justify-content: center;
+}
+
+.product-image img {
+  height: 100%;
 }
