@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { AppContext } from '../context';
 
 function loginValidation({ email, password }) {
@@ -13,7 +13,12 @@ function loginValidation({ email, password }) {
 }
 
 async function handleSubmit({ email, password }) {
-  // const loginRequisition = await axios.post().then((response) => response).catch();
+  const URL = '';
+  const response = await axios.post(URL, { email, password });
+  const result = await response
+    .then(({ token, username, role }) => ({ token, username, role }))
+    .catch((e) => console.error(e));
+  const mockResponseAdmin = { token: 'abc123', username: 'joazinho', role: 'administrador' };
 }
 
 const LoginButton = () => {
