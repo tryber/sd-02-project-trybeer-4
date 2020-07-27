@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { formatPrice } from '../utils';
+import '../styles/SeeShoppingCartButton.css';
 
 const calculateTotalPrice = (products, quantities) =>
   products.reduce(
@@ -18,9 +19,11 @@ const SeeShoppingCartButton = () => {
         <button
           data-testid="checkout-bottom-btn"
         >
-          <div>Ver carrinho</div>
-          <div data-testid="checkout-bottom-btn-value">
-            {formatPrice(totalPrice)}
+          <div className="button-content">
+            <div>Ver carrinho</div>
+            <div data-testid="checkout-bottom-btn-value">
+              {formatPrice(totalPrice)}
+            </div>
           </div>
         </button>
       </a>

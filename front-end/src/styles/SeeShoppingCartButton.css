@@ -1,0 +1,33 @@
+.see-shopping-cart-button {
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
+}
+
+.see-shopping-cart-button a {
+  all: unset;
+}
+
+.see-shopping-cart-button button {
+  all: unset;
+  background-color: white;
+  height: 100px;
+  width: 100%;
+}
+
+.button-content {
+  align-items: center;
+  background-color: #1cd118;
+  display: flex;
+  font-size: 30px;
+  height: 70%;
+  justify-content: space-between;
+  margin: auto;
+  width: 85%;
+}
+
+.button-content div {
+  color: black;
+  font-weight: 700;
+  padding: 10px;
+}
