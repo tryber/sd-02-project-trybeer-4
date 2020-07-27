@@ -15,7 +15,6 @@ function loginValidation({ email, password }) {
 const LoginButton = () => {
   const { email, password, errorMessage } = useContext(AppContext);
   const validLogin = loginValidation({ email, password });
-
   return (
     <section className="login-btn-section">
       {validLogin === false
