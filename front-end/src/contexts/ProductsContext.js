@@ -17,6 +17,16 @@ const localStorageHandler = (products, quantities) => {
   localStorage.setItem('products', JSON.stringify(storedProducts));
 };
 
+const updateQuantities = (quantities, setQuantities, productIndex, shouldAdd) => {
+  const newQuantities = quantities.map((quantity, i) => {
+    if (i === productIndex) {
+      return shouldAdd ? quantity + 1 : quantity - 1;
+    }
+    return quantity;
+  });
+  setQuantities(newQuantities);
+};
+
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
@@ -30,18 +40,11 @@ const ProductsProvider = ({ children }) => {
     [quantities],
   );
 
-  const updateQuantities = (productIndex, shouldAdd) => {
-    const newQuantities = quantities.map((quantity, i) => {
-      if (i === productIndex) {
-        return shouldAdd ? quantity + 1 : quantity - 1;
-      }
-      return quantity;
-    });
-    setQuantities(newQuantities);
-  };
+  const addOne = (productIndex) =>
+    updateQuantities(quantities, setQuantities, productIndex, true);
 
-  const addOne = (productIndex) => updateQuantities(productIndex, true);
-  const subtractOne = (productIndex) => updateQuantities(productIndex, false);
+  const subtractOne = (productIndex) =>
+    updateQuantities(quantities, setQuantities, productIndex, false);
 
   const context = {
     products,
