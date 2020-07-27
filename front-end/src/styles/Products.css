@@ -5,3 +5,7 @@
   margin: 0 auto;
   width: 98%;
 }
+
+.empty-div {
+  height: 100px;
+}
