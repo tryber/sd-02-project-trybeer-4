@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../context';
 
 function loginValidation({ email, password }) {
@@ -12,32 +12,32 @@ function loginValidation({ email, password }) {
   return true;
 }
 
-async function handleSubmit({ email, password }) {
-  const URL = '';
-  const response = await axios.post(URL, { email, password });
-  const result = await response
-    .then(({ token, username, role }) => ({ token, username, role }))
-    .catch((e) => console.error(e));
-  const mockResponseAdmin = { token: 'abc123', username: 'joazinho', role: 'administrador' };
-}
-
 const LoginButton = () => {
-  const { email, password } = useContext(AppContext);
+  const { email, password, errorMessage } = useContext(AppContext);
   const validLogin = loginValidation({ email, password });
 
   return (
-    <section>
+    <section className="login-btn-section">
       {validLogin === false
         && <div>Digite uma email válido e uma senha númerica de pelo menos 6 caracteres</div>}
+      {errorMessage && <div>{errorMessage}</div>}
       <button
-        type="button"
-        className="login-btn"
-        data-testid="login-btn"
+        type="submit"
+        className="signin-btn"
+        data-testid="signin-btn"
         disabled={!validLogin}
-        onSubmit={() => handleSubmit({ email, password })}
       >
         ENTRAR
       </button>
+      <Link to="/register">
+        <button
+          type="button"
+          className="no-account-btn"
+          data-testid="no-account-btn"
+        >
+          Ainda não tenho conta
+        </button>
+      </Link>
     </section>
   );
 };

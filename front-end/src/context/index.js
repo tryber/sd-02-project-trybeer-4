@@ -6,12 +6,15 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const contextValues = {
     email,
     setEmail,
     password,
     setPassword,
+    errorMessage,
+    setErrorMessage,
   };
 
   return (

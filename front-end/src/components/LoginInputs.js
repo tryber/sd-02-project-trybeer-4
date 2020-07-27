@@ -5,14 +5,13 @@ const LoginInputs = () => {
   const { email, password, setEmail, setPassword } = useContext(AppContext);
 
   return (
-    <section className="login-section">
+    <section className="login-inputs-section">
       <label htmlFor="email">Email</label>
       <input
         id="email"
         name="setEmail"
         type="email"
         required
-        onInvalid={() => console.log('lalal')}
         data-testid="email-input"
         value={email}
         onChange={({ target: { value } }) => setEmail(value)}

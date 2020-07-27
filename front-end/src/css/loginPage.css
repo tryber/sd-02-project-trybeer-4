@@ -1,0 +1,11 @@
+.login-inputs-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-btn-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
