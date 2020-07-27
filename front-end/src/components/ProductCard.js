@@ -1,10 +1,6 @@
 import React from 'react';
 import QuantityHandler from './QuantityHandler';
-
-const formatPrice = (price) => price.toLocaleString(
-  'pt-BR',
-  { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' },
-);
+import { formatPrice } from '../utils';
 
 const ProductCard = ({ name, unitPrice, imageUrl, index }) => (
   <div className="product-card">
