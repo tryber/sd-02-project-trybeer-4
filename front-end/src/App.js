@@ -1,14 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ProductsProvider } from './contexts/ProductsContext';
-import Products from './pages/Products';
+import ProductsPage from './pages/ProductsPage';
 
 const App = () => {
   return (
-    <div>
-      <ProductsProvider>
-        <Products />
-      </ProductsProvider>
-    </div>
+      <BrowserRouter>
+        <Switch>
+          <ProductsProvider>
+            <Route path="/products" component={ProductsPage} />
+          </ProductsProvider>
+        </Switch>
+      </BrowserRouter>
   );
 };
 

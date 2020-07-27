@@ -30,7 +30,7 @@ const updateQuantities = (quantities, setQuantities, productIndex, shouldAdd) =>
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState(productsMock) //Provavelmente mudar essa linha
+  const [products, _setProducts] = useState(productsMock) //Provavelmente mudar essa linha
 
   const initialQuantities = getInitialQuantities(products);
   const [quantities, setQuantities] = useState(initialQuantities);

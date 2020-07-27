@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
-import '../styles/Products.css';
+import '../styles/ProductsPage.css';
 
-const Products = () => {
+const ProductsPage = () => {
   const { products } = useContext(ProductsContext);
 
   return (
@@ -26,4 +26,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsPage;
