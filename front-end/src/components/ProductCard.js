@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductContext } from '../contexts/ProductContext';
+import { ProductContext } from '../contexts/ProductCardContext';
 import QuantityHandler from './QuantityHandler';
 //import '../styles/ProductCard.css';
 
@@ -8,24 +8,26 @@ const formatPrice = (price) => price.toLocaleString(
   { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' },
 );
 
-const ProductCard = ({ id = 'ourId', name, unitPrice, imageUrl, index = 0 }) => {
+const localStorageHandler = (id, quantity) => {
+  const products = JSON.parse(localStorage.getItem('products')) || [];
+  const thisProductIndex = products.indexOf(products.find((product) => product.id === id));
+
+  if (thisProductIndex === -1) {
+    products.push({ id, quantity });
+  } else {
+    products[thisProductIndex] = { id, quantity };
+  }
+
+  const newProducts = products.filter((product) => product.quantity > 0);
+
+  localStorage.setItem('products', JSON.stringify(newProducts));
+};
+
+const ProductCard = ({ id, name, unitPrice, imageUrl, index = 0 }) => {
   const { quantity } = useContext(ProductContext);
 
   useEffect(
-    () => {
-      const products = JSON.parse(localStorage.getItem('products')) || [];
-      const thisProductIndex = products.indexOf(products.find((product) => product.id === id));
-
-      if (thisProductIndex === -1) {
-        products.push({ id, quantity });
-      } else {
-        products[thisProductIndex] = { id, quantity };
-      }
-
-      const newProducts = products.filter((product) => product.quantity > 0);
-
-      localStorage.setItem('products', JSON.stringify(newProducts));
-    },
+    () => localStorageHandler(id, quantity),
     [quantity],
   );
 
@@ -37,8 +39,9 @@ const ProductCard = ({ id = 'ourId', name, unitPrice, imageUrl, index = 0 }) => 
         {formatPrice(unitPrice)}
       </h2>
       <img
-        src={imageUrl}
         data-testid={`${index}-product-img`}
+        src={imageUrl}
+        alt={name}
       >
       </img>
       <h2
