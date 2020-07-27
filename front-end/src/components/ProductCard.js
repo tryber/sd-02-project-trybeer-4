@@ -1,6 +1,7 @@
 import React from 'react';
 import QuantityHandler from './QuantityHandler';
 import { formatPrice } from '../utils';
+import '../styles/ProductCard.css';
 
 const ProductCard = ({ name, unitPrice, imageUrl, index }) => (
   <div className="product-card">
