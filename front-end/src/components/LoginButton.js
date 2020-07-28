@@ -29,11 +29,7 @@ const LoginButton = () => {
         ENTRAR
       </button>
       <Link to="/register">
-        <button
-          type="button"
-          className="no-account-btn"
-          data-testid="no-account-btn"
-        >
+        <button type="button" className="no-account-btn" data-testid="no-account-btn">
           Ainda não tenho conta
         </button>
       </Link>
