@@ -1,10 +1,17 @@
 import React, { createContext, useState, useEffect } from 'react';
-import productsMock from '../mocks/productsMock';
+import requestAPI from '../services/backEndAPI';
+
+const localStorageHandler = (products, quantities) => {
+  if (products && products.length > 0) {
+    const storedProducts = products.map(({ id }, i) => ({ id, quantity: quantities[i] }));
+    localStorage.setItem('products', JSON.stringify(storedProducts));
+  }
+};
 
 const getInitialQuantities = (products) => {
   let storedProducts = JSON.parse(localStorage.getItem('products'));
 
-  if (!storedProducts) {
+  if (!storedProducts || storedProducts.length === 0) {
     storedProducts = products.map(({ id }) => ({ id, quantity: 0 }));
     localStorage.setItem('products', JSON.stringify(storedProducts));
   }
@@ -12,9 +19,15 @@ const getInitialQuantities = (products) => {
   return storedProducts.map(({ quantity }) => quantity);
 };
 
-const localStorageHandler = (products, quantities) => {
-  const storedProducts = products.map(({ id }, i) => ({ id, quantity: quantities[i] }));
-  localStorage.setItem('products', JSON.stringify(storedProducts));
+const getProductsFromAPI =  async (setProducts, setQuantities, setRedirect, token) => {
+  try {
+    const { data: { products } } = await requestAPI('GET', '/products', null, token);
+    const quantities = getInitialQuantities(products);
+    setProducts(products);
+    setQuantities(quantities);
+  } catch (e) {
+    setRedirect(true);
+  }
 };
 
 const updateQuantities = (quantities, setQuantities, productIndex, shouldAdd) => {
@@ -30,15 +43,17 @@ const updateQuantities = (quantities, setQuantities, productIndex, shouldAdd) =>
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
-  const [products, _setProducts] = useState(productsMock) //Provavelmente mudar essa linha
-
-  const initialQuantities = getInitialQuantities(products);
-  const [quantities, setQuantities] = useState(initialQuantities);
+  const [products, setProducts] = useState([]);
+  const [quantities, setQuantities] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(
     () => localStorageHandler(products, quantities),
     [quantities],
   );
+
+  const getProducts = (token) =>
+    getProductsFromAPI(setProducts, setQuantities, setRedirect, token);
 
   const addOne = (productIndex) =>
     updateQuantities(quantities, setQuantities, productIndex, true);
@@ -48,9 +63,11 @@ const ProductsProvider = ({ children }) => {
 
   const context = {
     products,
+    getProducts,
     quantities,
     addOne,
     subtractOne,
+    redirect,
   };
 
   return (
