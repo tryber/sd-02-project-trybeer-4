@@ -12,6 +12,7 @@ const requestAPI = (method, route, body, token) => {
     case 'GET': return axios.get(API_URL, config);
     case 'POST': return axios.post(API_URL, body, config);
     case 'PUT': return axios.put(API_URL, body, config);
+    default: return null;
   }
 };
 
