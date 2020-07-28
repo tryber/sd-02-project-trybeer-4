@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';
@@ -14,7 +15,7 @@ function LoginPage(props) {
       const response = await axios.post(process.env.REACT_APP_URL_LOGIN, { email, password });
       const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'administrador', token: response.data.token };
       localStorage.setItem('user', JSON.stringify(mockUserInfo));
-      // return mockUserInfo.role === 'administrador' ? props.history.push('/admin/orders') : props.history.push('/admin/products');
+      return props.history.push(mockUserInfo.role === 'administrador' ? '/admin/orders' : '/admin/products');
     } catch (error) {
       if (!error.response) return setErrorMessage('Erro de conexão com a API');
       return setErrorMessage(error.response.data.error.message);
