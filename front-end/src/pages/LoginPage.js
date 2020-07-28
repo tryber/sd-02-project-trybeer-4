@@ -7,6 +7,11 @@ import LoginButton from '../components/LoginButton';
 import { AppContext } from '../context';
 import '../css/loginPage.css';
 
+function getURL(role) {
+  if (role === 'administrador') return '/admin/orders';
+  return '/admin/products';
+}
+
 function LoginPage(props) {
   const { email, password, errorMessage, setErrorMessage } = useContext(AppContext);
   async function handleSubmit(e) {
@@ -15,7 +20,8 @@ function LoginPage(props) {
       const response = await axios.post(process.env.REACT_APP_URL_LOGIN, { email, password });
       const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'administrador', token: response.data.token };
       localStorage.setItem('user', JSON.stringify(mockUserInfo));
-      return props.history.push(mockUserInfo.role === 'administrador' ? '/admin/orders' : '/admin/products');
+      const path = getURL(mockUserInfo.role);
+      return props.history.push(path);
     } catch (error) {
       if (!error.response) return setErrorMessage('Erro de conexão com a API');
       return setErrorMessage(error.response.data.error.message);
