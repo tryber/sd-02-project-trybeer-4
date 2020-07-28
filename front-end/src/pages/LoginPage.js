@@ -3,21 +3,21 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';
 import LoginButton from '../components/LoginButton';
-import { AppContext } from '../context';
+import { LoginContext } from '../context/LoginContext';
 import '../css/loginPage.css';
 
 function getURL(role) {
-  if (role === 'administrador') return '/admin/orders';
-  return '/admin/products';
+  if (role === 'admin') return '/admin/orders';
+  return '/products';
 }
 
 function LoginPage(props) {
-  const { email, password, errorMessage, setErrorMessage } = useContext(AppContext);
+  const { email, password, errorMessage, setErrorMessage } = useContext(LoginContext);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const response = await axios.post(process.env.REACT_APP_URL_LOGIN, { email, password });
-      const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'administrador', token: response.data.token };
+      const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'admin', token: response.data.token };
       localStorage.setItem('user', JSON.stringify(mockUserInfo));
       const path = getURL(mockUserInfo.role);
       return props.history.push(path);

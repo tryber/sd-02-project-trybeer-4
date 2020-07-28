@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const AppContext = createContext();
+const LoginContext = createContext();
 
-const AppProvider = ({ children }) => {
+const LoginProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,14 +18,14 @@ const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={contextValues}>
+    <LoginContext.Provider value={contextValues}>
       {children}
-    </AppContext.Provider>
+    </LoginContext.Provider>
   );
 };
 
-export { AppContext, AppProvider };
+export { LoginContext, LoginProvider };
 
-AppProvider.propTypes = {
+LoginProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

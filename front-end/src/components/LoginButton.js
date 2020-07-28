@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context';
+import { LoginContext } from '../context/LoginContext';
 
 function loginValidation({ email, password }) {
   if (!password || !email) return null;
   const mailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
   const passwordRegex = /^\d+$/;
-  const validPass = password && passwordRegex.test(password) && password.length >= 6;
-  const validEmail = email && mailRegex.test(email);
-  if (!validPass || !validEmail) return false;
-  return true;
+  const validPass = passwordRegex.test(password) && password.length >= 6;
+  const validEmail = mailRegex.test(email);
+  return validPass && validEmail;
 }
 
 const LoginButton = () => {
-  const { email, password, errorMessage } = useContext(AppContext);
+  const { email, password, errorMessage } = useContext(LoginContext);
   const validLogin = loginValidation({ email, password });
   return (
     <section className="login-btn-section">

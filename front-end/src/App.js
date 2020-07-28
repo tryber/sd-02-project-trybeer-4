@@ -1,18 +1,18 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { AppProvider } from './context';
+import { LoginProvider } from './context/LoginContext';
 import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
     <div className="App">
-      <AppProvider>
-        <BrowserRouter>
-          <Switch>
+      <BrowserRouter>
+        <Switch>
+          <LoginProvider>
             <Route path="/login" component={LoginPage} />
-          </Switch>
-        </BrowserRouter>
-      </AppProvider>
+          </LoginProvider>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
