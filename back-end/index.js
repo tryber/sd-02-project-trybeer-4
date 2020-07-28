@@ -28,12 +28,13 @@ userRouter
     controllers.user.login,
   )
   .get(
-    '/:id',
+    '/me',
     middlewares.authentication,
     controllers.user.getInfo,
   )
-  .put(
-    '/:id',
+  .patch(
+    '/me',
+    middlewares.fieldsValidator(['name']),
     middlewares.authentication,
     controllers.user.edit,
   );

@@ -21,7 +21,7 @@ const login = async ({ email, password }) => {
 
   const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
 
-  return { user, token };
+  return { ...userData, token };
 };
 
 const register = async ({ name, email, password, role }) => {
@@ -31,37 +31,24 @@ const register = async ({ name, email, password, role }) => {
     throw boom.conflict('Email já está cadastrado');
   }
 
-  const newUser = await models.user.create({ name, email, password, role });
-  return newUser;
+  const { id, password: _, ...userData } = await models.user.create({
+    name,
+    email,
+    password,
+    role,
+  });
+
+  return userData;
 };
 
-const getInfo = async ({ idFromUrl, idFromAuth }) => {
-  const user = await models.user.findById(idFromUrl);
-
-  if (!user) {
-    throw boom.notFound('Usuário não encontrado');
-  }
-
-  if (idFromUrl !== idFromAuth) {
-    throw boom.forbidden('Operação não autorizada');
-  }
-
-  return user;
+const getInfo = async (id) => {
+  const { id: _, password, ...userData } = await models.user.findById(id);
+  return userData;
 };
 
-const edit = async ({ idFromUrl, idFromAuth, name }) => {
-  const userExists = await models.user.findById(idFromUrl);
-
-  if (!userExists) {
-    throw boom.notFound('Usuário não encontrado');
-  }
-
-  if (idFromUrl !== idFromAuth) {
-    throw boom.forbidden('Operação não autorizada');
-  }
-
-  const editedUser = await models.user.update({ id: idFromUrl, name });
-  return editedUser;
+const edit = async ({ id, name }) => {
+  const { id: _, password, ...userData } = await models.user.update({ id, name });
+  return userData;
 };
 
 module.exports = {
