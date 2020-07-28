@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';

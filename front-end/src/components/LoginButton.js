@@ -4,7 +4,7 @@ import { AppContext } from '../context';
 
 function loginValidation({ email, password }) {
   if (!password || !email) return null;
-  const mailRegex = /[a-z-]+@[a-z-]+/;
+  const mailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
   const passwordRegex = /^\d+$/;
   const validPass = password && passwordRegex.test(password) && password.length >= 6;
   const validEmail = email && mailRegex.test(email);
