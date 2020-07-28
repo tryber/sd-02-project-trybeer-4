@@ -10,6 +10,8 @@ const AppProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [seller, setSeller] = useState(false);
 
+  const role = seller ? 'admin' : 'client';
+
   const contextValues = {
     name,
     setName,
@@ -21,6 +23,7 @@ const AppProvider = ({ children }) => {
     setErrorMessage,
     seller,
     setSeller,
+    role,
   };
 
   return (

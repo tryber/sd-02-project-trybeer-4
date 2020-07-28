@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';
 import LoginButton from '../components/LoginButton';
 import { AppContext } from '../context';
 import '../css/loginPage.css';
+import requestAPI from '../services/backEndAPI';
 
 function getURL(role) {
   if (role === 'admin') return '/admin/orders';
@@ -17,7 +17,7 @@ function LoginPage(props) {
     e.preventDefault();
     e.target.reset();
     try {
-      const response = await axios.post(process.env.REACT_APP_URL_LOGIN, { email, password });
+      const response = await requestAPI('POST', '/users/login', { email, password });
       const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'admin', token: response.data.token };
       localStorage.setItem('user', JSON.stringify(mockUserInfo));
       const path = getURL(mockUserInfo.role);
