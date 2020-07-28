@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';
 import LoginButton from '../components/LoginButton';
-import { LoginContext } from '../context/LoginContext';
+import { AppContext } from '../context';
 import '../css/loginPage.css';
 
 function getURL(role) {
@@ -12,9 +12,10 @@ function getURL(role) {
 }
 
 function LoginPage(props) {
-  const { email, password, errorMessage, setErrorMessage } = useContext(LoginContext);
+  const { email, password, errorMessage, setErrorMessage } = useContext(AppContext);
   async function handleSubmit(e) {
     e.preventDefault();
+    e.target.reset();
     try {
       const response = await axios.post(process.env.REACT_APP_URL_LOGIN, { email, password });
       const mockUserInfo = { name: 'tryber', email: 'root@email.com', role: 'admin', token: response.data.token };

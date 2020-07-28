@@ -1,31 +1,37 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const LoginContext = createContext();
+const AppContext = createContext();
 
-const LoginProvider = ({ children }) => {
+const AppProvider = ({ children }) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [seller, setSeller] = useState(false);
 
   const contextValues = {
+    name,
+    setName,
     email,
     setEmail,
     password,
     setPassword,
     errorMessage,
     setErrorMessage,
+    seller,
+    setSeller,
   };
 
   return (
-    <LoginContext.Provider value={contextValues}>
+    <AppContext.Provider value={contextValues}>
       {children}
-    </LoginContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export { LoginContext, LoginProvider };
+export { AppContext, AppProvider };
 
-LoginProvider.propTypes = {
+AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
