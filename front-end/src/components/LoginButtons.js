@@ -3,7 +3,26 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../context';
 import { passwordValidation, emailValidation } from '../utils/fieldsValidation';
 
-const LoginButton = () => {
+const CreateAccountBtn = () => {
+  const { setEmail, setPassword } = useContext(AppContext);
+  return (
+    <Link to="/register">
+      <button
+        type="button"
+        className="no-account-btn"
+        data-testid="no-account-btn"
+        onClick={() => {
+          setEmail('');
+          setPassword('');
+        }}
+      >
+        Ainda não tenho conta
+      </button>
+    </Link>
+  );
+};
+
+const LoginButtons = () => {
   const { email, password, errorMessage } = useContext(AppContext);
   const validLogin = emailValidation(email) && passwordValidation(password);
   return (
@@ -19,13 +38,9 @@ const LoginButton = () => {
       >
         ENTRAR
       </button>
-      <Link to="/register">
-        <button type="button" className="no-account-btn" data-testid="no-account-btn">
-          Ainda não tenho conta
-        </button>
-      </Link>
+      <CreateAccountBtn />
     </section>
   );
 };
 
-export default LoginButton;
+export default LoginButtons;

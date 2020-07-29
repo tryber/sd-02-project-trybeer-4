@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LoginInputs from '../components/LoginInputs';
-import LoginButton from '../components/LoginButton';
+import LoginButtons from '../components/LoginButtons';
 import { AppContext } from '../context';
 import '../css/loginPage.css';
 import requestAPI from '../services/backEndAPI';
@@ -35,7 +35,7 @@ function LoginPage(props) {
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <LoginInputs />
-      <LoginButton />
+      <LoginButtons />
     </form>
   );
 }
