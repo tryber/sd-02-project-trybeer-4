@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context';
+import { UserContext } from '../contexts/UserContext';
 import { passwordValidation, emailValidation } from '../utils/fieldsValidation';
 
 const CreateAccountBtn = () => {
-  const { setEmail, setPassword } = useContext(AppContext);
+  const { setEmail, setPassword } = useContext(UserContext);
   return (
     <Link to="/register">
       <button
@@ -23,7 +23,7 @@ const CreateAccountBtn = () => {
 };
 
 const LoginButtons = () => {
-  const { email, password, errorMessage } = useContext(AppContext);
+  const { email, password, errorMessage } = useContext(UserContext);
   const validLogin = emailValidation(email) && passwordValidation(password);
   return (
     <section className="login-btn-section">

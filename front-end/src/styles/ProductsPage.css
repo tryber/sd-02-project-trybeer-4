@@ -1,0 +1,11 @@
+.all-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 98%;
+}
+
+.empty-div {
+  height: 100px;
+}

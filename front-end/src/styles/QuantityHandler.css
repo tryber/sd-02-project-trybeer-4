@@ -1,0 +1,25 @@
+.quantity-handler {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.quantity-handler button {
+  all: unset;
+  font-size: 50px;
+  text-align: center;
+  width: 30%;
+}
+
+.quantity-handler p {
+  all: unset;
+  border: 1px solid black;
+  font-size: 35px;
+  margin: 8px;
+  padding: 0;
+  text-align: center;
+  width: 30%;
+}
+

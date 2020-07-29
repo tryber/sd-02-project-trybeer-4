@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { UserContext } from '../contexts/UserContext';
 
 function RegisterCheckbox() {
-  const { seller, setSeller } = useContext(AppContext);
+  const { seller, setSeller } = useContext(UserContext);
 
   return (
     <section className="register-checkbox-section">

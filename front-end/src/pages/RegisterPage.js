@@ -4,16 +4,15 @@ import RegisterInputs from '../components/RegisterInputs';
 import RegisterCheckbox from '../components/RegisterCheckbox';
 import RegisterButton from '../components/RegisterButton';
 import requestAPI from '../services/backEndAPI';
-import { AppContext } from '../context';
+import { UserContext } from '../contexts/UserContext';
 
 function getURL(role) {
-  console.log(role)
   if (role === 'admin') return '/admin/orders';
   return '/products';
 }
 
 function RegisterPage(props) {
-  const { name, email, password, setErrorMessage, role } = useContext(AppContext);
+  const { name, email, password, setErrorMessage, role } = useContext(UserContext);
 
   async function handleSubmit(e) {
     e.preventDefault();

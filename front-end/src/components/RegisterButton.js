@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { UserContext } from '../contexts/UserContext';
 import { emailValidation, passwordValidation, nameValidation } from '../utils/fieldsValidation';
 
 function RegisterButton() {
-  const { name, email, password, errorMessage } = useContext(AppContext);
+  const { name, email, password, errorMessage } = useContext(UserContext);
   const validRegister = emailValidation(email)
     && passwordValidation(password)
     && nameValidation(name);

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { UserContext } from '../contexts/UserContext';
 
 function NameInput() {
-  const { name, setName } = useContext(AppContext);
+  const { name, setName } = useContext(UserContext);
 
   return (
     <>
@@ -21,7 +21,7 @@ function NameInput() {
 }
 
 function EmailInput() {
-  const { email, setEmail } = useContext(AppContext);
+  const { email, setEmail } = useContext(UserContext);
 
   return (
     <>
@@ -40,7 +40,7 @@ function EmailInput() {
 }
 
 function PasswordInput() {
-  const { password, setPassword } = useContext(AppContext);
+  const { password, setPassword } = useContext(UserContext);
 
   return (
     <>
