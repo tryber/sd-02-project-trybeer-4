@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LoginContext } from '../context/LoginContext';
+import { LoginContext } from '../contexts/LoginContext';
 
 const LoginInputs = () => {
   const { email, password, setEmail, setPassword } = useContext(LoginContext);

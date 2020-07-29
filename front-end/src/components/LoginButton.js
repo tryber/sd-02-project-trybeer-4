@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { LoginContext } from '../context/LoginContext';
+import { LoginContext } from '../contexts/LoginContext';
 
 function loginValidation({ email, password }) {
   if (!password || !email) return null;

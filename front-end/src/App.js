@@ -1,20 +1,17 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { LoginProvider } from './context/LoginContext';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import ProductsPage from './pages/ProductsPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <LoginProvider>
-            <Route path="/login" component={LoginPage} />
-          </LoginProvider>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/products" component={ProductsPage} />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
