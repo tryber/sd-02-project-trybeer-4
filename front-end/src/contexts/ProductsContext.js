@@ -19,8 +19,9 @@ const getInitialQuantities = (products) => {
   return storedProducts.map(({ quantity }) => quantity);
 };
 
-const getProductsFromAPI =  async (setProducts, setQuantities, setRedirect, token) => {
+const getProductsFromAPI =  async (setProducts, setQuantities, setRedirect) => {
   try {
+    const { token } = JSON.parse(localStorage.getItem('user')) || {};
     const { data: products } = await requestAPI('GET', '/products', null, token);
     const quantities = getInitialQuantities(products);
     setProducts(products);
@@ -47,13 +48,13 @@ const ProductsProvider = ({ children }) => {
   const [quantities, setQuantities] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
-  useEffect(
-    () => { localStorageHandler(products, quantities) },
-    [quantities],
-  );
+  useEffect(() => {
+    localStorageHandler(products, quantities);
+  }, [quantities]);
 
-  const getProducts = (token) =>
-    getProductsFromAPI(setProducts, setQuantities, setRedirect, token);
+  const loadProducts = async () => {
+    await getProductsFromAPI(setProducts, setQuantities, setRedirect);
+  };
 
   const addOne = (productIndex) =>
     updateQuantities(quantities, setQuantities, productIndex, true);
@@ -63,7 +64,7 @@ const ProductsProvider = ({ children }) => {
 
   const context = {
     products,
-    getProducts,
+    loadProducts,
     quantities,
     addOne,
     subtractOne,

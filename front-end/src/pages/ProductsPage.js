@@ -5,13 +5,26 @@ import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
 import '../styles/ProductsPage.css';
 
-const ProductsPage = () => {
-  const { products, getProducts, redirect } = useContext(ProductsContext);
-  const { token } = JSON.parse(localStorage.getItem('user')) || {};
+const renderElements = (products) => (
+  <div>
+    <div className="all-cards">
+      {products.map(({ id, name, unitPrice, imageUrl }, index) =>
+        <ProductCard
+          id={id}
+          name={name}
+          unitPrice={unitPrice}
+          imageUrl={imageUrl}
+          index={index}
+        />
+      )}
+    </div>
+    <div className="empty-div" />
+    <SeeShoppingCartButton />
+  </div>
+);
 
-  const loadProducts = async () => {
-    await getProducts(token);
-  }
+const ProductsPage = () => {
+  const { products, loadProducts, redirect } = useContext(ProductsContext);
 
   useEffect(() => {
     loadProducts();
@@ -22,23 +35,7 @@ const ProductsPage = () => {
     return <Redirect to="/login" />
   }
 
-  return (
-    <div>
-      <div className="all-cards">
-        {products.map(({ id, name, unitPrice, imageUrl }, index) =>
-          <ProductCard
-            id={id}
-            name={name}
-            unitPrice={unitPrice}
-            imageUrl={imageUrl}
-            index={index}
-          />
-        )}
-      </div>
-      <div className="empty-div" />
-      <SeeShoppingCartButton />
-    </div>
-  );
+  return renderElements(products);
 };
 
 export default () => (
