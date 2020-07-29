@@ -48,7 +48,7 @@ const ProductsProvider = ({ children }) => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(
-    () => localStorageHandler(products, quantities),
+    () => { localStorageHandler(products, quantities) },
     [quantities],
   );
 

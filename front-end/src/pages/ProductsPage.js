@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductsContext } from '../contexts/ProductsContext';
+import { ProductsContext, ProductsProvider } from '../contexts/ProductsContext';
 import { Redirect } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
@@ -9,10 +9,13 @@ const ProductsPage = () => {
   const { products, getProducts, redirect } = useContext(ProductsContext);
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
 
-  useEffect(
-    async () => await getProducts(token),
-    [],
-  );
+  const loadProducts = async () => {
+    await getProducts(token);
+  }
+
+  useEffect(() => {
+    loadProducts()
+  }, []);
 
   return redirect ?
     <Redirect to="/login" /> :
@@ -33,4 +36,8 @@ const ProductsPage = () => {
     </div>);
 };
 
-export default ProductsPage;
+export default () => (
+  <ProductsProvider>
+    <ProductsPage />
+  </ProductsProvider>
+);

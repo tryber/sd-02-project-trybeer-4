@@ -2,37 +2,57 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors');
+
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post(
-  '/users/login',
-  middlewares.fieldsValidator(['email', 'password']),
-  controllers.user.login,
-);
+const userRouter = express.Router();
 
-app.post(
-  '/users',
-  middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
-  controllers.user.register,
-);
+userRouter
+  .post(
+    '/',
+    middlewares.fieldsValidator(['name', 'email', 'password', 'role']),
+    controllers.user.register,
+  )
+  .post(
+    '/login',
+    middlewares.fieldsValidator(['email', 'password']),
+    controllers.user.login,
+  )
+  .get(
+    '/me',
+    middlewares.authentication,
+    controllers.user.getInfo,
+  )
+  .patch(
+    '/me',
+    middlewares.fieldsValidator(['name']),
+    middlewares.authentication,
+    controllers.user.edit,
+  );
 
-app.get(
-  '/users/info',
-  middlewares.authentication,
-  controllers.user.getInfo,
-);
+app.use('/users', userRouter);
 
-app.put(
-  '/users/:id',
-  middlewares.authentication,
-  controllers.user.edit,
-);
+const productRouter = express.Router();
+
+productRouter
+  .get(
+    '/',
+    middlewares.authentication,
+    controllers.product.getAll,
+  );
+
+app.use('/products', productRouter);
+
+app.use('/back-end/public/', express.static(path.join(__dirname, 'public')));
 
 app.use(middlewares.boomErrorHandler);
 app.use(middlewares.otherErrorsHandler);

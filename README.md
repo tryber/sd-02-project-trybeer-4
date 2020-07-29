@@ -250,8 +250,6 @@ Esta tela possui o nome `Cliente - Checkout` no protótipo.
 
 52. Caso a pessoa atualize o browser, o carrinho deve ser mantido;
 
-53. Mostre o `número do pedido` e sua `data de realização`. Para a data de realização do pedido, mostre apenas o dia e o mês;
-
 54. Deve ter uma lista dos produtos selecionados com a seguinte estrutura: `quantidade do produto -- nome do produto -- valor total do produto`, sendo o valor total calculado por **quantidade * preço unitário**;
 
 55. Ao lado de cada produto deve haver um botão que, quando clicado, exclui este produto do carrinho;

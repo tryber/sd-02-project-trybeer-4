@@ -11,7 +11,7 @@ const requestAPI = (method, route, body, token) => {
   switch (method) {
     case 'GET': return axios.get(API_URL, config);
     case 'POST': return axios.post(API_URL, body, config);
-    case 'PUT': return axios.put(API_URL, body, config);
+    case 'PATCH': return axios.patch(API_URL, body, config);
     default: return null;
   }
 };
