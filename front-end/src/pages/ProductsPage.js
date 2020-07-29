@@ -8,13 +8,10 @@ import '../styles/ProductsPage.css';
 const renderElements = (products) => (
   <div>
     <div className="all-cards">
-      {products.map(({ id, name, unitPrice, imageUrl }, index) =>
+      {products.map(({ name, unitPrice, imageUrl }, index) =>
         <ProductCard
-          id={id}
-          name={name}
-          unitPrice={unitPrice}
-          imageUrl={imageUrl}
           index={index}
+          data={{ name, unitPrice, imageUrl }}
         />
       )}
     </div>
@@ -24,16 +21,23 @@ const renderElements = (products) => (
 );
 
 const ProductsPage = () => {
-  const { products, loadProducts, redirect } = useContext(ProductsContext);
+  const {
+    products,
+    loadProducts,
+    quantities,
+    storeQuantities,
+    redirect,
+  } = useContext(ProductsContext);
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
+  useEffect(
+    () => {
+      loadProducts();
+      storeQuantities(quantities);
+    },
+    [loadProducts, storeQuantities, quantities],
+  );
 
-  if (redirect) {
-    localStorage.clear();
-    return <Redirect to="/login" />
-  }
+  if (redirect) return <Redirect to="/login" />;
 
   return renderElements(products);
 };

@@ -3,7 +3,7 @@ import QuantityHandler from './QuantityHandler';
 import { formatPrice } from '../utils';
 import '../styles/ProductCard.css';
 
-const ProductCard = ({ name, unitPrice, imageUrl, index }) => (
+const ProductCard = ({ index, data : { name, unitPrice, imageUrl } }) => (
   <div className="product-card">
     <p
       data-testid={`${index}-product-price`}

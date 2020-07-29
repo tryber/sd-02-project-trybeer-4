@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import requestAPI from '../services/backEndAPI';
 
-const localStorageHandler = (products, quantities) => {
+const handleLocalStorage = (products, quantities) => {
   if (products && products.length > 0) {
     const storedProducts = products.map(({ id }, i) => ({ id, quantity: quantities[i] }));
     localStorage.setItem('products', JSON.stringify(storedProducts));
@@ -19,15 +19,17 @@ const getInitialQuantities = (products) => {
   return storedProducts.map(({ quantity }) => quantity);
 };
 
-const getProductsFromAPI =  async (setProducts, setQuantities, setRedirect) => {
-  try {
-    const { token } = JSON.parse(localStorage.getItem('user')) || {};
-    const { data: products } = await requestAPI('GET', '/products', null, token);
-    const quantities = getInitialQuantities(products);
-    setProducts(products);
-    setQuantities(quantities);
-  } catch (e) {
-    setRedirect(true);
+const handleProducts =  async (products, setProducts, setQuantities, setRedirect) => {
+  if (!products || products.length === 0) {
+    try {
+      const { token } = JSON.parse(localStorage.getItem('user')) || {};
+      const { data: products } = await requestAPI('GET', '/products', null, token);
+      const quantities = getInitialQuantities(products);
+      setProducts(products);
+      setQuantities(quantities);
+    } catch (e) {
+      setRedirect(true);
+    }
   }
 };
 
@@ -48,26 +50,24 @@ const ProductsProvider = ({ children }) => {
   const [quantities, setQuantities] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
-  useEffect(() => {
-    localStorageHandler(products, quantities);
-  }, [quantities]);
+  const storeQuantities = (quantities) => handleLocalStorage(products, quantities);
 
-  const loadProducts = async () => {
-    await getProductsFromAPI(setProducts, setQuantities, setRedirect);
-  };
+  const loadProducts = async () => 
+    handleProducts(products, setProducts, setQuantities, setRedirect);
 
-  const addOne = (productIndex) =>
+  const increaseQuantity = (productIndex) =>
     updateQuantities(quantities, setQuantities, productIndex, true);
 
-  const subtractOne = (productIndex) =>
+  const decreaseQuantity = (productIndex) =>
     updateQuantities(quantities, setQuantities, productIndex, false);
 
   const context = {
     products,
     loadProducts,
     quantities,
-    addOne,
-    subtractOne,
+    increaseQuantity,
+    decreaseQuantity,
+    storeQuantities,
     redirect,
   };
 

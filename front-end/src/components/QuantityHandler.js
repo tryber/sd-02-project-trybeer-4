@@ -3,15 +3,20 @@ import { ProductsContext } from '../contexts/ProductsContext';
 import '../styles/QuantityHandler.css';
 
 const QuantityHandler = ({ index }) => {
-  const { quantities, addOne, subtractOne } = useContext(ProductsContext);
+  const { quantities, increaseQuantity, decreaseQuantity } = useContext(ProductsContext);
+
   const quantity = quantities[index];
+  const disabled = quantity === 0;
+
+  const addOne = () => increaseQuantity(index);
+  const subtractOne = () => decreaseQuantity(index);
 
   return (
     <div className="quantity-handler">
       <button
         data-testid={`${index}-product-minus`}
-        onClick={() => subtractOne(index)}
-        disabled={quantity === 0}
+        disabled={disabled}
+        onClick={subtractOne}
       >
         -
       </button>
@@ -20,7 +25,7 @@ const QuantityHandler = ({ index }) => {
       </p>
       <button
         data-testid={`${index}-product-plus`}
-        onClick={() => addOne(index)}
+        onClick={addOne}
       >
         +
       </button>
