@@ -21,7 +21,7 @@ const getInitialQuantities = (products) => {
 
 const getProductsFromAPI =  async (setProducts, setQuantities, setRedirect, token) => {
   try {
-    const { data: { products } } = await requestAPI('GET', '/products', null, token);
+    const { data: products } = await requestAPI('GET', '/products', null, token);
     const quantities = getInitialQuantities(products);
     setProducts(products);
     setQuantities(quantities);

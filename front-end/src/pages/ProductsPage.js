@@ -14,12 +14,16 @@ const ProductsPage = () => {
   }
 
   useEffect(() => {
-    loadProducts()
+    loadProducts();
   }, []);
 
-  return redirect ?
-    <Redirect to="/login" /> :
-    (<div>
+  if (redirect) {
+    localStorage.clear();
+    return <Redirect to="/login" />
+  }
+
+  return (
+    <div>
       <div className="all-cards">
         {products.map(({ id, name, unitPrice, imageUrl }, index) =>
           <ProductCard
@@ -33,7 +37,8 @@ const ProductsPage = () => {
       </div>
       <div className="empty-div" />
       <SeeShoppingCartButton />
-    </div>);
+    </div>
+  );
 };
 
 export default () => (
