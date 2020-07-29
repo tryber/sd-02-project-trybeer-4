@@ -250,8 +250,6 @@ Esta tela possui o nome `Cliente - Checkout` no protótipo.
 
 52. Caso a pessoa atualize o browser, o carrinho deve ser mantido;
 
-53. Mostre o `número do pedido` e sua `data de realização`. Para a data de realização do pedido, mostre apenas o dia e o mês;
-
 54. Deve ter uma lista dos produtos selecionados com a seguinte estrutura: `quantidade do produto -- nome do produto -- valor total do produto`, sendo o valor total calculado por **quantidade * preço unitário**;
 
 55. Ao lado de cada produto deve haver um botão que, quando clicado, exclui este produto do carrinho;
@@ -388,9 +386,9 @@ Essa página corresponde às páginas `Admin - Detalhes de Pedido - Pendente` e 
 
 1. Clone o repositório
 
-- `git clone git@github.com:tryber/trybeer-project.git`.
+- `git clone git@github.com:tryber/sd-02-project-trybeer-4.git`.
 - Entre na pasta do repositório que você acabou de clonar:
-  - `cd trybeer-project`
+  - `cd sd-02-project-trybeer-4`
 
 2. Instale as dependências do front-end e do back-end
 
@@ -431,13 +429,13 @@ Essa página corresponde às páginas `Admin - Detalhes de Pedido - Pendente` e 
 
 7. Crie um novo `Pull Request` _(PR)_
 
-- Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/trybeer-project/pulls)
+- Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-project-trybeer-4/pulls)
 - Clique no botão verde _"New pull request"_
 - Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
 - Clique no botão verde _"Create pull request"_
 - Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
 - **Não se preocupe em preencher mais nada por enquanto!**
-- Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/trybeer-project/pulls) e confira que o seu _Pull Request_ está criado
+- Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-project-trybeer-4/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
