@@ -4,6 +4,7 @@ import { LoginContext, LoginProvider } from '../contexts/LoginContext';
 import LoginInputs from '../components/LoginInputs';
 import LoginButton from '../components/LoginButton';
 import requestAPI from '../services/backEndAPI';
+import Header from '../components/Header';
 import '../styles/LoginPage.css';
 
 function clearInputs(setEmail, setPassword) {
@@ -45,10 +46,13 @@ function LoginPage() {
   if (redirect.shouldRedirect) return <Redirect to={redirect.to} />;
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <LoginInputs />
-      <LoginButton />
-    </form>
+    <div>
+      <Header title="Login" /> 
+      <form onSubmit={handleSubmit} className="login-form">
+        <LoginInputs />
+        <LoginButton />
+      </form>
+    </div>
   );
 }
 
