@@ -3,25 +3,6 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import { passwordValidation, emailValidation } from '../utils/fieldsValidation';
 
-const CreateAccountBtn = () => {
-  const { setEmail, setPassword } = useContext(UserContext);
-  return (
-    <Link to="/register">
-      <button
-        type="button"
-        className="no-account-btn"
-        data-testid="no-account-btn"
-        onClick={() => {
-          setEmail('');
-          setPassword('');
-        }}
-      >
-        Ainda não tenho conta
-      </button>
-    </Link>
-  );
-};
-
 const LoginButtons = () => {
   const { email, password, errorMessage } = useContext(UserContext);
   const validLogin = emailValidation(email) && passwordValidation(password);
@@ -38,7 +19,15 @@ const LoginButtons = () => {
       >
         ENTRAR
       </button>
-      <CreateAccountBtn />
+      <Link to="/register">
+        <button
+          type="button"
+          className="no-account-btn"
+          data-testid="no-account-btn"
+        >
+          Ainda não tenho conta
+      </button>
+      </Link>
     </section>
   );
 };

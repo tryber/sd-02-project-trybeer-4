@@ -4,17 +4,19 @@ import requestAPI from './services/backEndAPI';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [authorized, setAuthorized] = useState(false);
-  const [tokenIsValid, setTokenIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
     requestAPI('GET', '/users/token', null, user.token)
     .then(() => setAuthorized(true))
-    .catch(() => setAuthorized(false))
-    .then(() => setTokenIsValid(true));
+    .then(() =>setIsLoading(false))
+    .catch(() => {
+      setIsLoading(false);
+    });
   }, [user.token])
 
-  if (!tokenIsValid) return <div>Carregando...</div>
+  if (isLoading) return <div>Carregando...</div>
 
   return (
     <Route

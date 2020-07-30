@@ -1,3 +1,9 @@
+.register-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .signup-inputs-section {
   align-items: center;
   display: flex;
@@ -8,4 +14,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.register-checkbox-section {
+  margin: 1rem;
 }

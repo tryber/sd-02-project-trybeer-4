@@ -41,7 +41,7 @@ userRouter
   .get(
     '/token',
     middlewares.authentication,
-    (_req, res) => res.status(200).json(),
+    controllers.user.confirmToken,
   );
 
 app.use('/users', userRouter);
