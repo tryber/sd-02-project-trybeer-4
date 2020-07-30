@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductsContext, ProductsProvider } from '../contexts/ProductsContext';
 import { Redirect } from 'react-router-dom';
+import { ProductsContext, ProductsProvider } from '../contexts/ProductsContext';
 import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
 import '../styles/ProductsPage.css';
@@ -8,12 +8,12 @@ import '../styles/ProductsPage.css';
 const renderElements = (products) => (
   <div>
     <div className="all-cards">
-      {products.map(({ name, unitPrice, imageUrl }, index) =>
+      {products.map(({ name, unitPrice, imageUrl }, index) => (
         <ProductCard
           index={index}
           data={{ name, unitPrice, imageUrl }}
         />
-      )}
+      ))}
     </div>
     <div className="empty-div" />
     <SeeShoppingCartButton />

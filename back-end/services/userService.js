@@ -54,7 +54,8 @@ const getInfo = async (id) => {
 
 const edit = async ({ id, name }) => {
   const { id: _, password, ...userData } = await models.user.update({ id, name });
-  return userData;
+  const token = tokenGenerator(id, userData);
+  return { ...userData, token };
 };
 
 module.exports = {
