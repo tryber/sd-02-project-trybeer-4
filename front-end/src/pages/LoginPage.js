@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext, UserProvider } from '../contexts/UserContext';
 import LoginInputs from '../components/LoginInputs';
 import requestAPI from '../services/backEndAPI';
@@ -16,13 +16,13 @@ function getURL(role) {
   return '/products';
 }
 
-async function submitForm(event, body, setRedirect, setErrorMessage) {
+async function submitForm(event, body, history, setErrorMessage) {
   event.preventDefault();
   try {
     const { data } = await requestAPI('POST', '/users/login', body);
     localStorage.setItem('user', JSON.stringify(data));
     const path = getURL(data.role);
-    return setRedirect({ shouldRedirect: true, to: path });
+    return history.push(path);
   } catch (error) {
     if (!error.response) return setErrorMessage('Erro de conexão com a API');
     return setErrorMessage(error.response.data.error.message);
@@ -31,17 +31,15 @@ async function submitForm(event, body, setRedirect, setErrorMessage) {
 
 function LoginPage() {
   const { email, setEmail, password, setPassword, setErrorMessage } = useContext(UserContext);
-  const [redirect, setRedirect] = useState({ shouldRedirect: false, to: '' });
+  const history = useHistory();
 
   const body = { email, password };
-  const handleSubmit = (event) => submitForm(event, body, setRedirect, setErrorMessage);
+  const handleSubmit = (event) => submitForm(event, body, history, setErrorMessage);
 
   useEffect(
     () => () => clearInputs(setEmail, setPassword),
     [setEmail, setPassword],
   );
-
-  if (redirect.shouldRedirect) return <Redirect to={redirect.to} />;
 
   return (
     <form onSubmit={handleSubmit} className="login-form">

@@ -1,0 +1,11 @@
+.signup-inputs-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-btn-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

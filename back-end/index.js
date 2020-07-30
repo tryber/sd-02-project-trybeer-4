@@ -37,6 +37,11 @@ userRouter
     middlewares.fieldsValidator(['name']),
     middlewares.authentication,
     controllers.user.edit,
+  )
+  .get(
+    '/token',
+    middlewares.authentication,
+    (_req, res) => res.status(200).json(),
   );
 
 app.use('/users', userRouter);
