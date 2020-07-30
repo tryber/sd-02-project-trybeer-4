@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RegisterInputs from '../components/RegisterInputs';
 import RegisterCheckbox from '../components/RegisterCheckbox';
@@ -13,7 +13,9 @@ function getURL(role) {
 }
 
 function RegisterPage() {
-  const { name, email, password, setErrorMessage, role } = useContext(UserContext);
+  const {
+    name, email, password, setErrorMessage, role, setEmail, setPassword, setName,
+  } = useContext(UserContext);
   const history = useHistory();
 
   async function handleSubmit(e) {
@@ -29,6 +31,15 @@ function RegisterPage() {
       return setErrorMessage(error.response.data.error.message);
     }
   }
+
+  useEffect(
+    () => () => {
+      setName('');
+      setPassword('');
+      setEmail('');
+    },
+    [setEmail, setPassword, setName],
+  );
 
   return (
     <form onSubmit={handleSubmit} className="register-form">

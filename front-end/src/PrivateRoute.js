@@ -9,22 +9,22 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   useEffect(() => {
     requestAPI('GET', '/users/token', null, user.token)
-    .then(() => setAuthorized(true))
-    .then(() =>setIsLoading(false))
-    .catch(() => {
-      setIsLoading(false);
-    });
-  }, [user.token])
+      .then(() => setAuthorized(true))
+      .then(() => setIsLoading(false))
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }, [user.token]);
 
-  if (isLoading) return <div>Carregando...</div>
+  if (isLoading) return <div>Carregando...</div>;
 
   return (
     <Route
       {...rest}
       render={(props) => (
         authorized
-        ? <Component {...props} />
-        : <Redirect to="/login" />
+          ? <Component {...props} />
+          : <Redirect to="/login" />
       )}
     />
   );

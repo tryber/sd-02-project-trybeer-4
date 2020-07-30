@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 import { UserProvider, UserContext } from '../contexts/UserContext';
 import requestAPI from '../services/backEndAPI';
 import UpdateUserBtn from '../components/UpdateUserBtn';
-import '../styles/ProfilePage.css';
 import ClientProfileInputs from '../components/ClientProfileInputs';
+import '../styles/ProfilePage.css';
 
 function ClientProfile() {
-  const { name: contextName, setErrorMessage } = useContext(UserContext);
+  const { name, setErrorMessage } = useContext(UserContext);
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   async function handleSubmit(e) {
     e.preventDefault();
     e.target.reset();
     try {
-      const { data } = await requestAPI('PATCH', '/users/me', { contextName }, token);
+      const { data } = await requestAPI('PATCH', '/users/me', { name }, token);
       return localStorage.setItem('user', JSON.stringify(data));
     } catch (error) {
       if (!error.response) return setErrorMessage('Erro de conexão com a API');
