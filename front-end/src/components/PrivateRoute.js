@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 import requestAPI from '../services/backEndAPI';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(rest);
   const [authorized, setAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem('user')) || {};

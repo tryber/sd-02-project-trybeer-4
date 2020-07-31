@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
 
 function ClientProfileInputs() {
   const { name: contextName, setName } = useContext(UserContext);
   const { name, email } = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    if (!contextName) setName(name);
+  }, [contextName, setName, name]);
 
   return (
     <>
@@ -13,7 +17,7 @@ function ClientProfileInputs() {
         type="text"
         required
         data-testid="profile-name-input"
-        value={(contextName || name).toUpperCase()}
+        value={contextName.toUpperCase()}
         onChange={({ target: { value } }) => setName(value)}
       />
       <label htmlFor="email">Email</label>

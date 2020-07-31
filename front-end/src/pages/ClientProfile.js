@@ -6,7 +6,7 @@ import ClientProfileInputs from '../components/ClientProfileInputs';
 import '../styles/ProfilePage.css';
 
 function ClientProfile() {
-  const { name, setErrorMessage } = useContext(UserContext);
+  const { name, setErrorMessage, setName } = useContext(UserContext);
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   async function handleSubmit(e) {
@@ -14,7 +14,8 @@ function ClientProfile() {
     e.target.reset();
     try {
       const { data } = await requestAPI('PATCH', '/users/me', { name }, token);
-      return localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
+      return setName(data.name);
     } catch (error) {
       if (!error.response) return setErrorMessage('Erro de conexão com a API');
       return setErrorMessage(error.response.data.error.message);
