@@ -13,7 +13,7 @@ function ClientProfileInputs() {
         type="text"
         required
         data-testid="profile-name-input"
-        value={contextName || name}
+        value={(contextName || name).toUpperCase()}
         onChange={({ target: { value } }) => setName(value)}
       />
       <label htmlFor="email">Email</label>

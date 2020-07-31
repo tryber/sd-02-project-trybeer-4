@@ -4,6 +4,7 @@ import { nameValidation } from '../utils/fieldsValidation';
 
 const UpdateUserBtn = () => {
   const { name, errorMessage } = useContext(UserContext);
+  const { name: currentName } = JSON.parse(localStorage.getItem('user'));
   const validName = nameValidation(name);
   return (
     <section className="login-btn-section">
@@ -13,7 +14,7 @@ const UpdateUserBtn = () => {
         type="submit"
         className="profile-save-btn"
         data-testid="profile-save-btn"
-        disabled={!validName}
+        disabled={!validName || currentName === name}
       >
         SALVAR
       </button>
