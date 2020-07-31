@@ -84,7 +84,7 @@ const insertInOrders = async ({ address, totalPrice, clientId }) => (
 
 const insertInOrderProduct = async ({ orderId, products }) => (
   products.map(async ({ productId, productQuantity }) =>
-    getTable('orders')
+    getTable('order_product')
       .then((table) =>
         table
           .insert(['order_id', 'product_id', 'product_quantity'])
