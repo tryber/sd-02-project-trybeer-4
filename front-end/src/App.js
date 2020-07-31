@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import ProductsPage from './pages/ProductsPage';
-import Header from './components/Header';
 
 const App = () => {
   return (
