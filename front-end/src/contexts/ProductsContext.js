@@ -3,7 +3,12 @@ import requestAPI from '../services/backEndAPI';
 
 const handleLocalStorage = (products, quantities) => {
   if (products && products.length > 0) {
-    const storedProducts = products.map(({ id }, i) => ({ id, quantity: quantities[i] }));
+    const storedProducts = products.map(({ id, name, unitPrice }, i) => ({
+      id,
+      name,
+      unitPrice,
+      quantity: quantities[i] || 0,
+    }));
     localStorage.setItem('products', JSON.stringify(storedProducts));
   }
 };
@@ -12,7 +17,12 @@ const getInitialQuantities = (products) => {
   let storedProducts = JSON.parse(localStorage.getItem('products'));
 
   if (!storedProducts || storedProducts.length === 0) {
-    storedProducts = products.map(({ id }) => ({ id, quantity: 0 }));
+    storedProducts = products.map(({ id, name, unitPrice }) => ({
+      id,
+      name,
+      unitPrice,
+      quantity: 0,
+    }));
     localStorage.setItem('products', JSON.stringify(storedProducts));
   }
 
