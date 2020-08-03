@@ -63,8 +63,10 @@ orderRouter
   .post(
     '/',
     middlewares.authentication,
-    controllers.order.insert,
+    controllers.order.create,
   );
+
+app.use('/orders', orderRouter);
 
 app.use('/back-end/public/', express.static(path.join(__dirname, 'public')));
 

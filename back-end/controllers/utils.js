@@ -20,8 +20,30 @@ const validatePassword = (password) => {
   return passwordRegex.test(password) && password.length >= 6;
 };
 
+const validateAddress = (addressName, addressNumber) => {
+  return typeof addressName === 'string' && typeof addressNumber === 'number';
+};
+
+const validatePrice = (price) => {
+  return typeof price === 'number';
+};
+
+const validateProducts = (products) => {
+  if (Array.isArray(products)) {
+    return products.every(({ productQuantity, productId }) => (
+      (productQuantity && typeof productQuantity === 'number')
+      &&
+      (productId && typeof productId === 'number')
+    ))
+  }
+  return false;
+}
+
 module.exports = {
   validateName,
   validateEmail,
   validatePassword,
+  validateAddress,
+  validatePrice,
+  validateProducts,
 };
