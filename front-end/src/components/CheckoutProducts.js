@@ -3,28 +3,28 @@ import { ProductsContext } from '../contexts/ProductsContext';
 import { formatPrice, calculateTotalPrice } from '../utils';
 
 const CheckoutProducts = () => {
-  const { quantities } = useContext(ProductsContext);
+  const { quantities, resetQuantity } = useContext(ProductsContext);
+console.log(quantities)
 
   const productsInShoppingCart = (JSON.parse(localStorage.getItem('products')) || [])
     .map((product, i) => ({
       ...product,
-      quantity: quantities[i] || product.quantity,
+      quantity: quantities[i],
     }))
     .filter(({ quantity }) => quantity > 0);
 
-console.log(productsInShoppingCart)
-
-  const removeProduct = (id) => localStorage.setItem(
-    'products',
-    JSON.stringify(
-      JSON.parse((localStorage.getItem('products')) || [])
-        .map((product) =>
-          product.id === id
-          ? { ...product, quantity: 0 }
-          : product
-        )
-    )
-  );
+    console.log(productsInShoppingCart)
+  // const removeProduct = (id) => localStorage.setItem(
+  //   'products',
+  //   JSON.stringify(
+  //     JSON.parse((localStorage.getItem('products')) || [])
+  //       .map((product) =>
+  //         product.id === id
+  //         ? { ...product, quantity: 0 }
+  //         : product
+  //       )
+  //   )
+  // );
 
   return (
     <section>
@@ -37,7 +37,7 @@ console.log(productsInShoppingCart)
             <div data-testid={`${index}-product-total-value`}>
               {formatPrice(quantity * unitPrice)}
             </div>
-            <button onClick={() => removeProduct(id)}>X</button>
+            <button onClick={() => resetQuantity(id - 1)}>X</button>
           </div>
         ))}
       </div>

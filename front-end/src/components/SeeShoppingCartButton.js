@@ -9,7 +9,7 @@ const SeeShoppingCartButton = () => {
   const products = (JSON.parse(localStorage.getItem('products')) || [])
     .map((product, i) => ({
       ...product,
-      quantity: quantities[i] || 0,
+      quantity: quantities[i],
     }));
 
   return quantities.length > 0 ?(

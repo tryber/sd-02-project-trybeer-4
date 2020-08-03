@@ -32,9 +32,9 @@ const ProductsPage = () => {
   useEffect(
     () => {
       loadProducts();
-      storeQuantities(quantities);
+      //storeQuantities(quantities);
     },
-    [loadProducts, storeQuantities, quantities],
+    [loadProducts]//, storeQuantities, quantities],
   );
 
   if (redirect) return <Redirect to="/login" />;

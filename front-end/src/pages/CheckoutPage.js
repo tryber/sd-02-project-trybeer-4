@@ -3,7 +3,7 @@ import { ProductsProvider, ProductsContext } from '../contexts/ProductsContext';
 import CheckoutProducts from '../components/CheckoutProducts';
 
 const CheckoutPage = () => {
-  const { products } = useContext(ProductsContext);
+  const { products, quantities } = useContext(ProductsContext);
 
   return (
     <div>
