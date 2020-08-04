@@ -21,7 +21,7 @@ const validatePassword = (password) => {
 };
 
 const validateAddress = (addressName, addressNumber) => {
-  return typeof addressName === 'string' && typeof addressNumber === 'number';
+  return typeof addressName === 'string' && typeof addressNumber === 'string';
 };
 
 const validatePrice = (price) => {
