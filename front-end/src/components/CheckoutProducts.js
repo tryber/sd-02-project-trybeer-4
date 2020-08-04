@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { formatPrice, calculateTotalPrice } from '../utils';
+import '../styles/CheckoutProducts.css';
 
 const CheckoutProducts = () => {
   const { quantities, resetQuantity } = useContext(ProductsContext);
-console.log(quantities)
 
   const productsInShoppingCart = (JSON.parse(localStorage.getItem('products')) || [])
     .map((product, i) => ({
@@ -13,25 +13,12 @@ console.log(quantities)
     }))
     .filter(({ quantity }) => quantity > 0);
 
-    console.log(productsInShoppingCart)
-  // const removeProduct = (id) => localStorage.setItem(
-  //   'products',
-  //   JSON.stringify(
-  //     JSON.parse((localStorage.getItem('products')) || [])
-  //       .map((product) =>
-  //         product.id === id
-  //         ? { ...product, quantity: 0 }
-  //         : product
-  //       )
-  //   )
-  // );
-
   return (
     <section>
       <h2>Produtos</h2>
       <div>
         {productsInShoppingCart.map(({ id, quantity, name, unitPrice }, index) => (
-          <div>
+          <div className="checkout-product-card">
             <div data-testid={`${index}-product-qtd-input`}>{quantity}</div>
             <div data-testid={`${index}-product-name`}>{name}</div>
             <div data-testid={`${index}-product-total-value`}>
@@ -41,7 +28,7 @@ console.log(quantities)
           </div>
         ))}
       </div>
-      <div data-testid="order-total-value">
+      <div data-testid="order-total-value" className="checkout-total-price">
         {`Total: ${formatPrice(calculateTotalPrice(productsInShoppingCart))}`}
       </div>
     </section>

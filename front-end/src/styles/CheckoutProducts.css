@@ -1,0 +1,12 @@
+.checkout-product-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.checkout-total-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 10px;
+}

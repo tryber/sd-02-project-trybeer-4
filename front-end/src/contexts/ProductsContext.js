@@ -1,8 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import requestAPI from '../services/backEndAPI';
 
-const handleLocalStorage = (products, quantities) => {
-  // if (products && products.length > 0) {
+const handleLocalStorage = (quantities) => {
   const storedProducts = (JSON.parse(localStorage.getItem('products')) || [])
     .map(({ id, name, unitPrice }, i) => ({
       id,
@@ -10,8 +9,7 @@ const handleLocalStorage = (products, quantities) => {
       unitPrice,
       quantity: quantities[i] || 0,
     }));
-    localStorage.setItem('products', JSON.stringify(storedProducts));
-  // }
+  localStorage.setItem('products', JSON.stringify(storedProducts));
 };
 
 const getInitialQuantities = (products) => {
@@ -66,7 +64,7 @@ const ProductsProvider = ({ children }) => {
   const [quantities, setQuantities] = useState(getInitialQuantities(products));
   const [redirect, setRedirect] = useState(false);
 
-  const storeQuantities = (quantities) => handleLocalStorage(products, quantities);
+  const storeQuantities = (quantities) => handleLocalStorage(quantities);
 
   const loadProducts = async () => 
     handleProducts(products, setProducts, setQuantities, setRedirect);
@@ -94,7 +92,6 @@ const ProductsProvider = ({ children }) => {
     increaseQuantity,
     decreaseQuantity,
     resetQuantity,
-    storeQuantities,
     redirect,
   };
 

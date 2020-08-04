@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { formatPrice, calculateTotalPrice } from '../utils';
 import '../styles/SeeShoppingCartButton.css';
@@ -12,22 +12,24 @@ const SeeShoppingCartButton = () => {
       quantity: quantities[i],
     }));
 
-  return quantities.length > 0 ?(
-    <div className="see-shopping-cart-button">
-      <a href="/checkout">
-        <button
-          data-testid="checkout-bottom-btn"
-        >
-          <div className="button-content">
-            <div>Ver carrinho</div>
-            <div data-testid="checkout-bottom-btn-value">
-              {formatPrice(calculateTotalPrice(products))}
+  return quantities.length > 0
+    ? (
+      <div className="see-shopping-cart-button">
+        <a href="/checkout">
+          <button
+            data-testid="checkout-bottom-btn"
+          >
+            <div className="button-content">
+              <div>Ver carrinho</div>
+              <div data-testid="checkout-bottom-btn-value">
+                {formatPrice(calculateTotalPrice(products))}
+              </div>
             </div>
-          </div>
-        </button>
-      </a>
-    </div>
-  ) : null;
+          </button>
+        </a>
+      </div>
+    )
+    : null;
 };
 
 export default SeeShoppingCartButton;
