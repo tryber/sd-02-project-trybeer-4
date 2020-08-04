@@ -4,6 +4,20 @@ import { ProductsContext } from '../contexts/ProductsContext';
 import { calculateTotalPrice } from '../utils';
 import requestAPI from '../services/backEndAPI';
 
+const finishCheckout = async (body, setRedirect) => {
+  const { token } = JSON.parse(localStorage.getItem('user')) || {};
+  try {
+    await requestAPI('POST', '/orders', body, token);
+    alert('Compra realizada com sucesso!');
+    localStorage.removeItem('products');
+    return setRedirect(true);
+  } catch (err) {
+    return err.response
+      ? alert(err.response.data.error.message)
+      : alert(err);
+  }
+};
+
 const CheckoutButton = () => {
   const { quantities, addressName, addressNumber } = useContext(ProductsContext);
   const [redirect, setRedirect] = useState(false);
@@ -25,20 +39,6 @@ const CheckoutButton = () => {
     }));
 
   const body = { addressName, addressNumber, products, totalPrice };
-  const { token } = JSON.parse(localStorage.getItem('user')) || {};
-
-  const finishCheckout = async () => {
-    try {
-      await requestAPI('POST', '/orders', body, token);
-      alert('Compra realizada com sucesso!');
-      localStorage.removeItem('products');
-      return setRedirect(true);
-    } catch (err) {
-      return err.response
-        ? alert(err.response.data.error.message)
-        : alert(err);
-    }
-  }
 
   if (redirect) return <Redirect to="/products" />;
 
@@ -47,7 +47,7 @@ const CheckoutButton = () => {
       <button
         data-testid="checkout-finish-btn"
         disabled={disabled}
-        onClick={finishCheckout}
+        onClick={() => finishCheckout(body, setRedirect)}
       >
         Finalizar Pedido
       </button>
