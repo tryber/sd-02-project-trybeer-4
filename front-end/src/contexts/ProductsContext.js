@@ -63,6 +63,8 @@ const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState(getInitialQuantities(products));
   const [redirect, setRedirect] = useState(false);
+  const [addressName, setAddressName] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
 
   const storeQuantities = (quantities) => handleLocalStorage(quantities);
 
@@ -92,6 +94,10 @@ const ProductsProvider = ({ children }) => {
     increaseQuantity,
     decreaseQuantity,
     resetQuantity,
+    addressName,
+    setAddressName,
+    addressNumber,
+    setAddressNumber,
     redirect,
   };
 
