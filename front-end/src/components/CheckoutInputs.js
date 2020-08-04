@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
-//import '../styles/CheckoutInputs.css';
+import '../styles/CheckoutInputs.css';
 
 const CheckoutInputs = () => {
   const {
@@ -11,7 +11,7 @@ const CheckoutInputs = () => {
   } = useContext(ProductsContext);
 
   return (
-    <section>
+    <section className="checkout-inputs-section">
       <h2>Endereço</h2>
       <label htmlFor="addressName">Rua:</label>
       <input
