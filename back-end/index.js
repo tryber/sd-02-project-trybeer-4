@@ -57,6 +57,17 @@ productRouter
 
 app.use('/products', productRouter);
 
+const orderRouter = express.Router();
+
+orderRouter
+  .post(
+    '/',
+    middlewares.authentication,
+    controllers.order.create,
+  );
+
+app.use('/orders', orderRouter);
+
 app.use('/back-end/public/', express.static(path.join(__dirname, 'public')));
 
 app.use(middlewares.boomErrorHandler);
