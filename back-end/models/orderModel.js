@@ -26,20 +26,34 @@ const getProductsForEachOrder = async (ids) => (
     getSession()
       .then((session) =>
         session
-          .sql(`
-            SELECT
-            product_id,
-            product_quantity
-            FROM trybeer.order_product
-            WHERE order_id = ?;
-          `)
+          .sql(
+            `SELECT 
+            op.product_id, 
+            op.product_quantity, 
+            (SELECT p.name FROM trybeer.products p WHERE op.product_id = p.id),
+            (SELECT p.unit_price FROM trybeer.products p WHERE op.product_id = p.id),
+            (SELECT p.unit_price * op.product_quantity FROM trybeer.products p WHERE op.product_id = p.id)
+            FROM
+            trybeer.order_product op
+            WHERE
+            order_id = ?;`
+          )
           .bind(id)
           .execute(),
       )
       .then((results) => results.fetchAll())
-      .then((products) => products.map(([productId, productQuantity]) => ({
+      .then((products) => products.map(([
         productId,
         productQuantity,
+        productName,
+        unitPrice,
+        totalProductPrice,
+      ]) => ({
+        productId,
+        productQuantity,
+        productName,
+        unitPrice,
+        totalProductPrice,
       }))),
   ))
 );
