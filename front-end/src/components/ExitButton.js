@@ -10,7 +10,7 @@ const ExitButton = () => {
   };
 
   return (
-    <div className="ExitButton">
+    <div className="ExitButton" data-testid="side-menu-item-logout">
       <button
         type="button"
         className="SideButton"

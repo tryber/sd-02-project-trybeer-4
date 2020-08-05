@@ -8,14 +8,14 @@ const SideMenu = () => {
   return (
     <div className="SideMenu_Container">
       <div className="ButtonContainer">
-      <Link to="/profile">
-        <button className="SideButton">Meu Perfil</button>
+      <Link to="/products">
+        <button className="SideButton" data-testid="side-menu-item-products">Produtos</button>
       </Link>
       <Link to="/orders">
-        <button className="SideButton">Meus Pedidos</button>
+        <button className="SideButton" data-testid="side-menu-item-my-orders">Meus Pedidos</button>
       </Link>
-      <Link to="/products">
-        <button className="SideButton">Produtos</button>
+      <Link to="/profile">
+        <button className="SideButton" data-testid="side-menu-item-my-profile">Meu Perfil</button>
       </Link>
       <ExitButton/>
       </div>
