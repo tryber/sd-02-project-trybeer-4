@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ExitButton from './ExitButton';
-import '../styles/SideMenu.css';
+// import '../styles/SideMenu.css';
 
 const SideMenu = ({open}) => {
   if(!open) {
