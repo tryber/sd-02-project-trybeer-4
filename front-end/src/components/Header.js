@@ -7,7 +7,7 @@ const Header = ({title}) => {
   return (
     <div className="container">
       <button>
-      <SideMenu />
+      {/* <SideMenu /> */}
         <img data-testid="top-hamburguer" src={Hamburguer} alt="Menu Hambúrguer" className="hamburguer-icon" />
       </button>
     <div data-testid="top-title">

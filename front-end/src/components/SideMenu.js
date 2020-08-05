@@ -17,8 +17,8 @@ const SideMenu = () => {
       <Link to="/profile">
         <button className="SideButton" data-testid="side-menu-item-my-profile">Meu Perfil</button>
       </Link>
-      <ExitButton/>
       </div>
+      <ExitButton/>
     </div>
     );
 };
