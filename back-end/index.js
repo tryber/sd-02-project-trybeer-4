@@ -64,6 +64,11 @@ orderRouter
     '/',
     middlewares.authentication,
     controllers.order.create,
+  )
+  .get(
+    '/',
+    middlewares.authentication,
+    controllers.order.getByClientId,
   );
 
 app.use('/orders', orderRouter);
