@@ -3,10 +3,12 @@ import { Redirect } from 'react-router-dom';
 import { ProductsContext, ProductsProvider } from '../contexts/ProductsContext';
 import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
+import Header from '../components/Header';
 import '../styles/ProductsPage.css';
 
 const renderElements = (products) => (
   <div>
+    <Header title="Trybeer" />
     <div className="all-cards">
       {products.map(({ name, unitPrice, imageUrl }, index) => (
         <ProductCard
