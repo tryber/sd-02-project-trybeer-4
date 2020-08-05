@@ -1,34 +1,35 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
-import { formatPrice } from '../utils';
+import { formatPrice, calculateTotalPrice } from '../utils';
 import '../styles/SeeShoppingCartButton.css';
 
-const calculateTotalPrice = (products, quantities) =>
-  products.reduce(
-    (acc, { unitPrice }, i) => acc + (unitPrice * quantities[i]),
-    0,
-  );
-
 const SeeShoppingCartButton = () => {
-  const { products, quantities } = useContext(ProductsContext);
-  const totalPrice = calculateTotalPrice(products, quantities);
+  const { quantities } = useContext(ProductsContext);
 
-  return (
-    <div className="see-shopping-cart-button">
-      <a href="/checkout">
-        <button
-          data-testid="checkout-bottom-btn"
-        >
-          <div className="button-content">
-            <div>Ver carrinho</div>
-            <div data-testid="checkout-bottom-btn-value">
-              {formatPrice(totalPrice)}
+  const products = (JSON.parse(localStorage.getItem('products')) || [])
+    .map((product, i) => ({
+      ...product,
+      quantity: quantities[i],
+    }));
+
+  return quantities.length > 0
+    ? (
+      <div className="see-shopping-cart-button">
+        <a href="/checkout">
+          <button
+            data-testid="checkout-bottom-btn"
+          >
+            <div className="button-content">
+              <div>Ver carrinho</div>
+              <div data-testid="checkout-bottom-btn-value">
+                {formatPrice(calculateTotalPrice(products))}
+              </div>
             </div>
-          </div>
-        </button>
-      </a>
-    </div>
-  );
+          </button>
+        </a>
+      </div>
+    )
+    : null;
 };
 
 export default SeeShoppingCartButton;

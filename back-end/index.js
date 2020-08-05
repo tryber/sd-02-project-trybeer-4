@@ -37,6 +37,11 @@ userRouter
     middlewares.fieldsValidator(['name']),
     middlewares.authentication,
     controllers.user.edit,
+  )
+  .get(
+    '/token',
+    middlewares.authentication,
+    controllers.user.confirmToken,
   );
 
 app.use('/users', userRouter);
@@ -51,6 +56,22 @@ productRouter
   );
 
 app.use('/products', productRouter);
+
+const orderRouter = express.Router();
+
+orderRouter
+  .post(
+    '/',
+    middlewares.authentication,
+    controllers.order.create,
+  )
+  .get(
+    '/',
+    middlewares.authentication,
+    controllers.order.getByClientId,
+  );
+
+app.use('/orders', orderRouter);
 
 app.use('/back-end/public/', express.static(path.join(__dirname, 'public')));
 

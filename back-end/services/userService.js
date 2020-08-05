@@ -4,6 +4,16 @@ const models = require('../models');
 
 const { JWT_SECRET } = process.env;
 
+const tokenGenerator = (id, userData) => {
+  const jwtConfig = {
+    expiresIn: '50m',
+    algorithm: 'HS256',
+    subject: String(id),
+  };
+
+  return jwt.sign(userData, JWT_SECRET, jwtConfig);
+}
+
 const login = async ({ email, password }) => {
   const user = await models.user.findByEmail(email);
 
@@ -13,13 +23,7 @@ const login = async ({ email, password }) => {
 
   const { password: _, id, ...userData } = user;
 
-  const jwtConfig = {
-    expiresIn: '50m',
-    algorithm: 'HS256',
-    subject: String(id),
-  };
-
-  const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
+  const token = tokenGenerator(id, userData);
 
   return { ...userData, token };
 };
@@ -38,7 +42,9 @@ const register = async ({ name, email, password, role }) => {
     role,
   });
 
-  return userData;
+  const token = tokenGenerator(id, userData);
+
+  return { ...userData, token };
 };
 
 const getInfo = async (id) => {
@@ -48,7 +54,8 @@ const getInfo = async (id) => {
 
 const edit = async ({ id, name }) => {
   const { id: _, password, ...userData } = await models.user.update({ id, name });
-  return userData;
+  const token = tokenGenerator(id, userData);
+  return { ...userData, token };
 };
 
 module.exports = {

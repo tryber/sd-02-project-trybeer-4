@@ -103,9 +103,12 @@ const edit = rescue(async (req, res, next) => {
   return res.status(200).json({ ...userData });
 });
 
+const confirmToken = (_req, res) => res.status(204).end();
+
 module.exports = {
   login,
   register,
   getInfo,
   edit,
+  confirmToken,
 };
