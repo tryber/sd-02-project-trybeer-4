@@ -4,6 +4,7 @@ import { ProductsContext, ProductsProvider } from '../contexts/ProductsContext';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import SeeShoppingCartButton from '../components/SeeShoppingCartButton';
+import Header from '../components/Header';
 import '../styles/ProductsPage.css';
 
 const renderElements = (products) => (

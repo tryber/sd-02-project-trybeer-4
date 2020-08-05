@@ -3,6 +3,7 @@ import { UserProvider, UserContext } from '../contexts/UserContext';
 import requestAPI from '../services/backEndAPI';
 import UpdateUserBtn from '../components/UpdateUserBtn';
 import ClientProfileInputs from '../components/ClientProfileInputs';
+import Header from '../components/Header';
 import '../styles/ProfilePage.css';
 
 function ClientProfile() {
@@ -24,6 +25,7 @@ function ClientProfile() {
 
   return (
     <form onSubmit={handleSubmit} className="client-profile-form">
+      <Header title="Meu perfil" />
       <ClientProfileInputs />
       <UpdateUserBtn />
     </form>

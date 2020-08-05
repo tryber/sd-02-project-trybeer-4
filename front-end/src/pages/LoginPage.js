@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { UserContext, UserProvider } from '../contexts/UserContext';
 import LoginInputs from '../components/LoginInputs';
 import requestAPI from '../services/backEndAPI';
-import Header from '../components/Header';
 import LoginButtons from '../components/LoginButtons';
 import '../styles/LoginPage.css';
 
@@ -43,8 +42,7 @@ function LoginPage() {
   );
 
   return (
-    <div>
-      <Header title="Login" /> 
+    <div> 
       <form onSubmit={handleSubmit} className="login-form">
         <LoginInputs />
         <LoginButtons />
