@@ -24,17 +24,14 @@ const ProductsPage = () => {
   const {
     products,
     loadProducts,
-    quantities,
-    storeQuantities,
     redirect,
   } = useContext(ProductsContext);
 
   useEffect(
     () => {
       loadProducts();
-      storeQuantities(quantities);
     },
-    [loadProducts, storeQuantities, quantities],
+    [loadProducts],
   );
 
   if (redirect) return <Redirect to="/login" />;
