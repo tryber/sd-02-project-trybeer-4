@@ -24,11 +24,13 @@ function ClientProfile() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="client-profile-form">
+    <div>
       <Header title="Meu perfil" />
-      <ClientProfileInputs />
-      <UpdateUserBtn />
-    </form>
+      <form onSubmit={handleSubmit} className="client-profile-form">
+        <ClientProfileInputs />
+        <UpdateUserBtn />
+      </form>
+    </div>
   );
 }
 

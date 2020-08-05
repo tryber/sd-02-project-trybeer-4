@@ -7,7 +7,7 @@ import CheckoutButton from '../components/CheckoutButton';
 
 const CheckoutPage = () => (
   <div>
-    <Header title="Finalizar Pedidos" />
+    <Header title="Finalizar Pedido" />
     <CheckoutProducts />
     <CheckoutInputs />
     <CheckoutButton />
