@@ -42,7 +42,7 @@ function LoginPage() {
   );
 
   return (
-    <div> 
+    <div>
       <form onSubmit={handleSubmit} className="login-form">
         <LoginInputs />
         <LoginButtons />
