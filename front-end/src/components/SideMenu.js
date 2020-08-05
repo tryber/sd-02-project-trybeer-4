@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import ExitButton from './ExitButton';
 import '../styles/SideMenu.css';
 
-const SideMenu = () => {
+const SideMenu = ({open}) => {
+  if(!open) {
+    return null
+  }
 
   return (
     <div className="SideMenu_Container">
