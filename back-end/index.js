@@ -69,6 +69,11 @@ orderRouter
     '/',
     middlewares.authentication,
     controllers.order.getByClientId,
+  )
+  .get(
+    '/:id',
+    middlewares.authentication,
+    controllers.order.findById,
   );
 
 app.use('/orders', orderRouter);

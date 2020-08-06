@@ -79,7 +79,7 @@ const getByClientId = async (clientId) => (
 const findById = async (id) => (
   getAll()
     .then((orders) => orders
-      .find((order) => order.id === id),
+      .filter((order) => order.id === id),
     )
 );
 

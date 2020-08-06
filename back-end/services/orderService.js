@@ -7,10 +7,16 @@ const create = async ({ addressName, addressNumber, totalPrice, products, client
 
 const getByClientId = async (id) => {
   const orders = await models.order.getByClientId(id);
-  return orders.map(({address, status, clientId, ...ordersData}) => ordersData)
+  return orders.map(({ products, ...ordersData }) => ordersData);
 };
+
+const findById = async (id) => {
+  const order = await models.order.findById(id);
+  return order.map(({ address, ...ordersData }) => ordersData);
+}
 
 module.exports = {
   create,
   getByClientId,
+  findById,
 };
