@@ -1,0 +1,51 @@
+.SideMenu_Container {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: space-around;
+  left: 0;
+  position: fixed;
+  top: 40px;
+  width: 30%;
+  z-index: 0;
+}
+
+.SideMenu_Container a {
+  width: 100%;
+}
+
+.SideButton {
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 6px;
+  color: gray;
+  cursor: pointer;
+  font-size: 2vh;
+  height: auto;
+  text-decoration: none;
+  width: 100%;
+}
+
+.SideButton:hover {
+  background-color: white;
+}
+
+.ButtonContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.ButtonContainer p {
+  color: white;
+  font-size: 20px;
+}
+
+.ExitButton {
+  width: 80%;
+}

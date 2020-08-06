@@ -27,7 +27,6 @@ const CheckoutInputs = () => {
       <input
         id="addressNumber"
         name="addressNumber"
-        type="addressNumber"
         type="text"
         required
         data-testid="checkout-house-number-input"

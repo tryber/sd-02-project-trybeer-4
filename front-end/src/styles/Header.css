@@ -1,0 +1,10 @@
+.container {
+  background-color: bisque;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hamburguer-icon {
+  height: 30px;
+  width: 30px;
+}

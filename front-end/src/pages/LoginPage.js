@@ -42,10 +42,12 @@ function LoginPage() {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <LoginInputs />
-      <LoginButtons />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="login-form">
+        <LoginInputs />
+        <LoginButtons />
+      </form>
+    </div>
   );
 }
 
