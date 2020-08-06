@@ -12,7 +12,8 @@ const getByClientId = async (id) => {
 
 const findById = async (id) => {
   const order = await models.order.findById(id);
-  return order.map(({ address, ...ordersData }) => ordersData);
+  const { address, ...ordersData } = order;
+  return ordersData;
 }
 
 module.exports = {

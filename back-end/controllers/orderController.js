@@ -45,7 +45,7 @@ const findById = rescue(async (req, res) => {
   
   const order = await services.order.findById(Number(id));
 
-  return res.status(200).json({ order });
+  return res.status(200).json(order);
 })
 
 module.exports = {
