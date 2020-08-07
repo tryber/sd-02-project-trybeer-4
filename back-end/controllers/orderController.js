@@ -37,7 +37,7 @@ const getAll = rescue(async (req, res) => {
 
   const orders = await services.order.getAll({ id, role });
 
-  return res.status(200).json({ orders });
+  return res.status(200).json(orders);
 })
 
 const findById = rescue(async (req, res) => {
