@@ -12,8 +12,8 @@ const RegisterInputs = () => {
         type="text"
         required
         data-testid="signup-name"
-        value={name.toUpperCase()}
-        onChange={({ target: { value } }) => setName(value)}
+        value={name}
+        onChange={({ target: { value } }) => setName(value.toUpperCase())}
       />
       <label htmlFor="email">Email</label>
       <input
@@ -21,8 +21,8 @@ const RegisterInputs = () => {
         type="email"
         required
         data-testid="signup-email"
-        value={email.toLowerCase()}
-        onChange={({ target: { value } }) => setEmail(value)}
+        value={email}
+        onChange={({ target: { value } }) => setEmail(value.toLowerCase())}
       />
       <label htmlFor="password">Senha</label>
       <input

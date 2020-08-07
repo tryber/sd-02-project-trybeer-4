@@ -1,0 +1,17 @@
+.order-card-client {
+  all: unset;
+  border: 2px solid black;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card-client-up {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.order-card-client-up div {
+  margin-top: 20px;
+}

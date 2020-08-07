@@ -8,3 +8,6 @@ export const calculateTotalPrice = (products) =>
     (acc, { unitPrice, quantity }) => acc + (unitPrice * quantity),
     0,
   );
+
+export const formatDate = (date) =>
+  `${date.substr(8, 2)}/${date.substr(5, 2)}`;

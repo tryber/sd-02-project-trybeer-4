@@ -42,7 +42,8 @@ const create = async ({ name, email, password, role = 'client' }) => (
         .values([name, email, password, role])
         .execute(),
     )
-    .then(() => ({
+    .then(({ getAutoIncrementValue }) => ({
+      id: getAutoIncrementValue(),
       name,
       email,
       password,
