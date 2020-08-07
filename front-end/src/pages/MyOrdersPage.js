@@ -10,7 +10,7 @@ const MyOrdersPage = () => {
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user')) || {};
     requestAPI('GET', '/orders', null, token)
-      .then(({ data }) => setOrders(data.orders.reverse()))
+      .then(({ data }) => setOrders(data.reverse()))
       .catch((error) => alert(error));
   }, []);
 
