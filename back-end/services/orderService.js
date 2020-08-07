@@ -6,8 +6,16 @@ const create = async ({ addressName, addressNumber, totalPrice, products, client
   return models.order.create({ address, totalPrice, clientId, products });
 };
 
-const getByClientId = async (id) => {
-  const orders = await models.order.getByClientId(id);
+const getAll = async ({ id, role }) => {
+  let orders = [];
+  if (role === 'admin') {
+    const allOrders = await models.order.getAll();
+    orders.push(allOrders);
+  }
+  if (role === 'client') {
+    const allClientOrders = await models.order.getByClientId(id);
+    orders.push(allClientOrders);
+  }
   return orders.map(({ products, ...ordersData }) => ordersData);
 };
 
@@ -26,7 +34,7 @@ const update = async ({ id, role }) => {
 
 module.exports = {
   create,
-  getByClientId,
+  getAll,
   findById,
   update,
 };

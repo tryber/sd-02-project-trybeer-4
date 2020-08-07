@@ -68,7 +68,7 @@ orderRouter
   .get(
     '/',
     middlewares.authentication,
-    controllers.order.getByClientId,
+    controllers.order.getAll,
   )
   .get(
     '/:id',
