@@ -48,8 +48,18 @@ const findById = rescue(async (req, res) => {
   return res.status(200).json(order);
 })
 
+const update = rescue(async (req, res) => {
+  const { role } = req.user;
+  const { id } = req.params;
+
+  const updatedOrder = await services.order.update({ role, id: Number(id) });
+
+  return res.status(200).json(updatedOrder);
+})
+
 module.exports = {
   create,
   getByClientId,
   findById,
+  update,
 };

@@ -74,6 +74,11 @@ orderRouter
     '/:id',
     middlewares.authentication,
     controllers.order.findById,
+  )
+  .patch(
+    '/:id',
+    middlewares.authentication,
+    controllers.order.update
   );
 
 app.use('/orders', orderRouter);
