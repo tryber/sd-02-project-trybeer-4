@@ -32,15 +32,34 @@ const create = rescue(async (req, res, next) => {
   res.status(201).json({ orderData });
 });
 
-const getByClientId = rescue(async (req, res, next) => {
-  const { id } = req.user;
+const getAll = rescue(async (req, res) => {
+  const { id, role } = req.user;
 
-  const orders = await services.order.getByClientId(id);
+  const orders = await services.order.getAll({ id, role });
 
-  return res.status(200).json({ orders });
+  return res.status(200).json(orders);
+})
+
+const findById = rescue(async (req, res) => {
+  const { id } = req.params;
+  
+  const order = await services.order.findById(Number(id));
+
+  return res.status(200).json(order);
+})
+
+const update = rescue(async (req, res) => {
+  const { role } = req.user;
+  const { id } = req.params;
+
+  const updatedOrder = await services.order.update({ role, id: Number(id) });
+
+  return res.status(200).json(updatedOrder);
 })
 
 module.exports = {
   create,
-  getByClientId,
+  getAll,
+  findById,
+  update,
 };

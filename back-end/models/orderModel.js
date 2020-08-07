@@ -118,8 +118,8 @@ const create = async ({ address, totalPrice, clientId, products }) => {
   };
 };
 
-const update = async ({ id, status }) => (
-  updateTable('orders', id, 'status', status)
+const update = async (id) => (
+  updateTable('orders', id, 'status', 'entregue')
     .then(async () => findById(id))
 );
 
