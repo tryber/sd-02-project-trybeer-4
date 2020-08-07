@@ -13,8 +13,8 @@ const LoginInputs = () => {
         type="email"
         required
         data-testid="email-input"
-        value={email.toLowerCase()}
-        onChange={({ target: { value } }) => setEmail(value)}
+        value={email}
+        onChange={({ target: { value } }) => setEmail(value.toLowerCase())}
       />
       <label htmlFor="password">Senha</label>
       <input
