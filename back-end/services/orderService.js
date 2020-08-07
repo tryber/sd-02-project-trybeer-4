@@ -7,15 +7,7 @@ const create = async ({ addressName, addressNumber, totalPrice, products, client
 };
 
 const getAll = async ({ id, role }) => {
-  let orders = [];
-  if (role === 'admin') {
-    const allOrders = await models.order.getAll();
-    orders.push(allOrders);
-  }
-  if (role === 'client') {
-    const allClientOrders = await models.order.getByClientId(id);
-    orders.push(allClientOrders);
-  }
+  const orders = role === 'admin' ? await models.order.getAll() : await models.order.getByClientId(id);
   return orders.map(({ products, ...ordersData }) => ordersData);
 };
 
