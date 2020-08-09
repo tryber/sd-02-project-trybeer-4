@@ -10,7 +10,9 @@ const AdminOrders = () => {
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user')) || {};
     requestAPI('GET', '/orders', null, token)
-      .then(({ data }) => setOrders(data))
+      .then(({ data }) => setOrders(
+        data.sort((a, b) => b.status.localeCompare(a.status)),
+      ))
       .catch((error) => alert(error));
   }, []);
 
