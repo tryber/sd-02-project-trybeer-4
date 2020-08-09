@@ -25,7 +25,7 @@
   width: 15rem;
 }
 
-.order-card-admin h3 {
+.order-card-title {
   font-weight: 700;
   margin: 0;
 }
@@ -44,6 +44,6 @@
   color: green;
 }
 
-.order-card-price{
+.order-card-price {
   font-weight: 700;
 }

@@ -25,7 +25,7 @@ const AdminOrders = () => {
           {orders.map(({ id, address, totalPrice, status }, index) => (
             <a href={`/admin/orders/${id}`} className="order-card-admin">
               <div>
-                <h3 data-testid={`${index}-order-number`}>
+                <h3 data-testid={`${index}-order-number`} className="order-card-title">
                   {`Pedido ${id}`}
                 </h3>
                 <div data-testid={`${index}-order-address`}>
