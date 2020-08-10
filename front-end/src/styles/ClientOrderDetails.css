@@ -1,0 +1,19 @@
+.client-order-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.client-order-products div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2px;
+}
+
+.client-order-total-value {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 10px;
+}

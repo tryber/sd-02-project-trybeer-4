@@ -7,6 +7,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import PrivateRoute from './components/PrivateRoute';
 import ClientProfile from './pages/ClientProfile';
 import MyOrdersPage from './pages/MyOrdersPage';
+import ClientOrderDetails from './pages/ClientOrderDetails';
 
 const App = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => (
       <PrivateRoute path="/checkout" component={CheckoutPage} />
       <PrivateRoute path="/profile" component={ClientProfile} />
       <PrivateRoute exact path="/orders" component={MyOrdersPage} />
+      <PrivateRoute path="/orders/:id" component={ClientOrderDetails} />
     </Switch>
   </BrowserRouter>
 );

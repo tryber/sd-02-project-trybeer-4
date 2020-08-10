@@ -14,7 +14,7 @@ const finishCheckout = async (body, setRedirect) => {
   } catch (err) {
     return err.response
       ? alert(err.response.data.error.message)
-      : alert('aaa');
+      : alert(err);
   }
 };
 
