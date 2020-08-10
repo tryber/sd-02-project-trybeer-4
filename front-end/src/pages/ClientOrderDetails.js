@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import requestAPI from '../services/backEndAPI';
-import SideMenu from '../components/SideMenu';
+import Header from '../components/Header';
 import { formatDate, formatPrice } from '../utils';
 import '../styles/ClientOrderDetails.css';
 
@@ -17,7 +17,7 @@ const ClientOrderDetails = ({ match }) => {
 
   return order ? (
     <div>
-      <SideMenu />
+      <Header title="Detalhes de Pedido" />
       <div>
         <section className="client-order-title">
           <h2 data-testid="order-number">
