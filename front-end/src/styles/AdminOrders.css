@@ -1,0 +1,49 @@
+.admin-orders-page {
+  display: flex;
+}
+
+.admin-orders-body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 33%;
+}
+
+.orders-cards-admin {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-card-admin {
+  border: 1px solid gray;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.5rem;
+  text-decoration: none;
+  width: 15rem;
+}
+
+.order-card-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.order-card-admin-down {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.status-pending {
+  color: rgb(209, 209, 0);
+}
+
+.status-delivered {
+  color: green;
+}
+
+.order-card-price {
+  font-weight: 700;
+}
