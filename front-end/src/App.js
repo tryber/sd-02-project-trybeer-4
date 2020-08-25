@@ -10,6 +10,7 @@ import AdminProfile from './pages/AdminProfile';
 import MyOrdersPage from './pages/MyOrdersPage';
 import ClientOrderDetails from './pages/ClientOrderDetails';
 import AdminOrders from './pages/AdminOrders';
+import AdminOrderDetails from './pages/AdminOrderDetails';
 
 const App = () => (
   <BrowserRouter>
@@ -23,6 +24,7 @@ const App = () => (
       <PrivateRoute exact path="/orders" component={MyOrdersPage} />
       <PrivateRoute path="/orders/:id" component={ClientOrderDetails} />
       <PrivateRoute exact path="/admin/orders" component={AdminOrders} />
+      <PrivateRoute path="/admin/orders/:id" component={AdminOrderDetails} />
     </Switch>
   </BrowserRouter>
 );
