@@ -45,7 +45,11 @@ const AdminOrderDetails = ({ match }) => {
             </h2>
           </section>
         </section>
-        <button type="button" hidden={order.status === 'entregue'}>
+        <button
+          type="button"
+          hidden={order.status === 'entregue'}
+          data-testid="mark-as-delivered-btn"
+        >
           Marcar como entregue
         </button>
       </div>
